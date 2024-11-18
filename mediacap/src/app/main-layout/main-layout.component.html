@@ -7,9 +7,42 @@
       </div>
   
       <ul class="menu-items">
-        <li [routerLink]="['/dashboard', userId]" role="button"><mat-icon>fact_check</mat-icon> Dashboard</li>
-        <li [routerLink]="['/films', userId]" role="button"><mat-icon>perm_identity</mat-icon>Films</li>
-        <li [routerLink]="['/books', userId]" role="button"><mat-icon>perm_identity</mat-icon>Books</li>
+        <!-- <li [routerLink]="['/dashboard', userId]" role="button"><mat-icon>fact_check</mat-icon> Dashboard</li> -->
+        
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [routerLink]="['/main', userId, 'dashboard']" role="button">
+                    <mat-icon>fact_check</mat-icon> Dashboard
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+              </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                <mat-expansion-panel-header >
+                  <mat-panel-title [routerLink]="['/main', userId, 'films']" ><mat-icon>theaters</mat-icon> Films </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li [routerLink]="['/main', userId, 'films', 'list']"><mat-icon>grading</mat-icon>Complete List</li>
+                    <li [routerLink]="['/main', userId, 'films', 'plans']"><mat-icon>bookmark_border</mat-icon>Watch List</li>
+                    <li [routerLink]="['/main', userId, 'films', 'favorites']"><mat-icon>star_outline</mat-icon>Favorites</li>
+                </ul>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [routerLink]="['/main', userId, 'books']">
+                    <mat-icon>menu_book</mat-icon> Books
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul>
+                  <li [routerLink]="['/main', userId, 'books', 'list']"><mat-icon>grading</mat-icon>Complete List</li>
+                  <li [routerLink]="['/main', userId, 'books', 'plans']"><mat-icon>bookmark_border</mat-icon>Reading List</li>
+                  <li [routerLink]="['/main', userId, 'books', 'favorites']"><mat-icon>star_outline</mat-icon>Favorites</li>
+                </ul>
+            </mat-expansion-panel>
+       
+    
+        
       </ul>
       
      

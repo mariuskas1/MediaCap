@@ -71,4 +71,22 @@
   }
   
   
-  
+  mat-panel-title{
+    font-weight: 400;
+
+    >mat-icon{
+        margin-right: 16px;
+    }
+  }
+
+//   mat-expansion-panel{
+//     >ul{
+//         list-style-type: disc;
+//     }
+//   }
+
+.menu-items ul {
+    list-style-type: disc; /* Adds dots to the list items */
+    padding-left: 4px;    /* Indents the list */
+}
+ 

@@ -48,11 +48,11 @@ export class LoginComponent {
       if (user && this.rememberUser) {
           this.logInFailed = false;
           localStorage.setItem('rememberedUser', JSON.stringify({ email: this.logInEmail }));
-          this.router.navigate([`/dashboard/${user.id}`]); 
+          this.router.navigate([`/main/${user.id}`]); 
       } else if (user && !this.rememberUser){
         console.log(user);
         this.logInFailed = false;
-        this.router.navigate([`/dashboard/${user.id}`]); 
+        this.router.navigate([`/main/${user.id}`]); 
       } else if (!user){
         this.logInFailed = true;
       }
@@ -61,26 +61,23 @@ export class LoginComponent {
 
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined' && localStorage) {
-      const rememberedUser = localStorage.getItem('rememberedUser');
-      if (rememberedUser) {
-        const rememberedEmail = JSON.parse(rememberedUser).email;
-        const rememberedUserDoc = this.users.find((user) => user.email === rememberedEmail);
-        if (rememberedUserDoc) {
-          this.router.navigate([`/dashboard/${rememberedUserDoc.id}`]); 
+    const usersCollection = collection(this.firestore, 'users');
+    collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
+      this.users = data;
+  
+      if (typeof window !== 'undefined' && localStorage) {
+        const rememberedUser = localStorage.getItem('rememberedUser');
+        if (rememberedUser) {
+          const rememberedEmail = JSON.parse(rememberedUser).email;
+          const rememberedUserDoc = this.users.find((user) => user.email === rememberedEmail);
+  
+          if (rememberedUserDoc) {
+            this.router.navigate([`/main/${rememberedUserDoc.id}`]); 
+          }
         }
-      } else {
-        const usersCollection = collection(this.firestore, 'users');
-        collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
-          this.users = data;
-        });
       }
-    } else {
-      const usersCollection = collection(this.firestore, 'users');
-      collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
-        this.users = data;
-      });
-    }
+    });
   }
+  
 
 }
