@@ -1,0 +1,31 @@
+
+<mat-drawer-container class="mat-drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" [opened]="true">
+      <div class="logo-div">
+        <img src="./../assets/img/simplelogo2.png" class="logo-img">
+        <span class="logo-text">MediaCap</span>
+      </div>
+  
+      <ul class="menu-items">
+        <li [routerLink]="['/dashboard', userId]" role="button"><mat-icon>fact_check</mat-icon> Dashboard</li>
+        <li [routerLink]="['/films', userId]" role="button"><mat-icon>perm_identity</mat-icon>Films</li>
+        <li [routerLink]="['/books', userId]" role="button"><mat-icon>perm_identity</mat-icon>Books</li>
+      </ul>
+      
+     
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+          <span>MediaCap</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+  
+      <div class="router-container">
+        <router-outlet></router-outlet>
+      </div>
+      
+    </div>
+  </mat-drawer-container>

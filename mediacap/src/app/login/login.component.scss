@@ -1,0 +1,33 @@
+@import './../../styles.scss';
+
+mat-card{
+    width: 400px;
+    height: 400px;
+    align-items: center;
+}
+
+form{
+    width: 100%;
+}
+
+.log-in-inputs-container{
+    @include displayFlex();
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 8px;
+    width: 100%;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+mat-card-actions{
+    width: 100%;
+    @include displayFlex();
+}
+
+.login-msg{
+    font-size: 14px;
+    color: red;
+}
+
+

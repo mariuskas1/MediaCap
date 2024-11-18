@@ -1,0 +1,38 @@
+
+@if(loading){
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<div class="register-dialog">
+    <h1 mat-dialog-title>Register</h1>
+    <form (ngSubmit)="saveUser(registerForm)" #registerForm="ngForm">
+        <mat-dialog-content>
+            <div class="mt-8">
+                <mat-form-field appearance="outline" class="width-100">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" [(ngModel)]="user.name" #name="ngModel" id="name" spellcheck="false" name="name" required>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline" class="width-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" [(ngModel)]="user.email" #email="ngModel" id="email" spellcheck="false" name="email" required>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline" class="width-100">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Password" [(ngModel)]="user.password" #password="ngModel" id="password" spellcheck="false" name="password" required>
+                </mat-form-field>
+            </div>
+        
+        </mat-dialog-content>
+            
+        <mat-dialog-actions>
+            <button mat-button [disabled]="loading" (click)="closeDialog()">Cancel</button>
+            <button mat-button [disabled]="loading" type="submit">Register</button>
+        </mat-dialog-actions>
+    </form>
+</div>

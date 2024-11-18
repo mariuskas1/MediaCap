@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@mixin displayFlex($jc: center, $ai: center){
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+.mt-8{
+    margin-top: 8px;
+}
+
+.width-100{
+    width: 100%;
+}
