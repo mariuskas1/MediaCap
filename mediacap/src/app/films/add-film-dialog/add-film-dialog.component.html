@@ -1,0 +1,87 @@
+@if(loading){
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<div class="add-film-dialog">
+    <div class="dialog-header">
+        <h1 mat-dialog-title class="header-text">Add Film</h1>
+        <div class="star-checkbox">
+            <input type="checkbox" id="star" [(ngModel)]="film.favorite"/>
+            <label for="star" class="star"></label>
+        </div>
+    </div>
+    
+    <mat-dialog-content>
+        <div style="margin-top:8px;">
+            <mat-form-field appearance="outline" class="width-100">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" [(ngModel)]="film.title" [disabled]="loading">
+            </mat-form-field>
+        </div>
+
+           
+        <div>
+            <mat-form-field appearance="outline" class="width-100">
+                <mat-label>Director</mat-label>
+                <input matInput placeholder="Director" [(ngModel)]="film.director" [disabled]="loading">
+            </mat-form-field>
+        </div>
+           
+        <div class="slider-div">
+            <div class="example-label-container width-100">
+                <label id="example-name-label" class="example-name-label">Rating: </label>
+                <label class="example-value-label">{{slider.value}}</label>
+              </div>
+              <mat-slider
+                  class="example-margin width-100"
+                  [disabled]="loading"
+                  [max]="5"
+                  [min]="0"
+                  [step]="0.5"
+                  >
+                <input matSliderThumb [(ngModel)]="film.rating" #slider>
+              </mat-slider>
+        </div>
+        
+    
+        <div>
+            <mat-form-field appearance="outline" class="width-100">
+                <mat-label>Year</mat-label>
+                <input matInput placeholder="Year" [(ngModel)]="film.year" [disabled]="loading">
+            </mat-form-field>
+        </div>
+
+        <div class="selector-div">
+            <mat-form-field appearance="outline" class="selector">
+                <mat-label>Year watched</mat-label>
+                <mat-select [(ngModel)]="film.yearWatched">
+                    @for (year of years; track $index) {
+                        <mat-option [value]="year">{{ year }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="selector">
+                <mat-label>Month watched</mat-label>
+                <mat-select [(ngModel)]="film.monthWatched">
+                    @for (month of months; track $index) {
+                        <mat-option [value]="month">{{ month }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="checkbox-div">
+            <mat-checkbox color="primary" class="example-margin" [(ngModel)]="film.theatre">Seen in theatre</mat-checkbox>           
+        </div>
+    
+    
+        
+    </mat-dialog-content>
+        
+    <mat-dialog-actions>
+      <button  mat-flat-button [disabled]="loading" (click)="closeDialog()">Cancel</button>
+      <button  color="primary" mat-raised-button [disabled]="loading" (click)="addFilm()">Save</button>
+    </mat-dialog-actions>
+</div>
+

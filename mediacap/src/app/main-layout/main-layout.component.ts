@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
@@ -20,7 +20,7 @@ import {MatMenuModule} from '@angular/material/menu';
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
   userId: string | null = null;
 
   readonly panelOpenState = signal(false);
@@ -32,6 +32,5 @@ export class MainLayoutComponent {
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('id');
     })
-    console.log(this.userId);
   }
 }

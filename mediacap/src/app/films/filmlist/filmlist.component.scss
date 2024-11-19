@@ -1,0 +1,71 @@
+.add-btn{
+    position: absolute;
+    right: 56px;
+    bottom: 56px;
+
+}
+
+mat-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.user-table{
+    width: 100%;
+    border-collapse: collapse;
+    
+    tr{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4); 
+        &:last-child{
+            border-bottom: 0;
+        }
+        &:first-child{
+            cursor: unset;
+            &:hover{
+                background-color: unset;
+            }
+        }
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+    }
+
+    th{
+        padding-left: 16px;
+    }
+   
+    td{
+        height: 48px;
+        padding: none;
+        a{
+            text-decoration: none;
+            padding-left: 16px;
+            color: black;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    th{
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 14px;
+        font-weight: 500;
+        text-align: start;
+    }
+}
+
+mat-icon{
+    z-index: 100;
+
+    &:hover{
+        cursor: pointer;
+        scale: 1.1;
+        transition: all 125ms ease;
+    }
+}
+
+.gold-star{
+    color: gold;
+}
