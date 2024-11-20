@@ -34,7 +34,7 @@ export class AddFilmDialogComponent {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  years: number[] = [2025, 2024, 2023, 2022]
+  years: number[] = [2025, 2024, 2023, 2022];
   userId: string | null = null;
   firestore: Firestore = inject(Firestore);
 
@@ -54,6 +54,7 @@ export class AddFilmDialogComponent {
       const filmsCollection = collection(this.firestore, `films/${this.userId}/userFilms` );
       await addDoc(filmsCollection, { ...this.film});
       this.loading = false;
+      this.film = new Film();
       this.dialogRef.close();
     } catch (err){
       console.error(err);

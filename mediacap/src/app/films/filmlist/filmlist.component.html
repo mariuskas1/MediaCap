@@ -1,4 +1,53 @@
 
+<mat-card appearance="outlined" class="settings-card" >
+
+    <div class="selector-container">
+        <label for="year-select">Year:</label>
+        <select id="year-select" class="selector" [(ngModel)]="currentYear">
+            @for (year of years; track $index) {
+                <option [value]="year">{{ year }}</option>
+            }
+          
+        </select>
+      </div>
+    
+      <div class="selector-container" id="month">
+        <label for="month-select">Month:</label>
+        <select id="month-select" class="selector" [(ngModel)]="currentMonth">
+            @for (month of months; track $index) {
+                <option [value]="month">{{ month }}</option>
+            }
+        </select>
+      </div>
+
+      <div class="selector-container" id="month">
+        <label for="month-select">Sort by:</label>
+        <select id="month-select" class="selector" [(ngModel)]="sortBy">  
+            <option value="favorites">Favorites</option>
+            <option value="theatre">Watched in theatre</option>
+            <option value="rating">Rating (Highest)</option>
+            <option value="rating">Rating (Lowest)</option>
+            
+        </select>
+      </div>
+
+      <div class="search-bar-container">
+        <input 
+          type="text" 
+          class="search-bar" 
+          placeholder="Search..." 
+          [(ngModel)]="searchQuery" 
+          (input)="onSearch(searchQuery)"
+        />
+    
+      </div>
+
+      <button mat-fab color="primary" class="add-btn" matTooltip="Add film" [matTooltipPosition]="'above'" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        </button>
+
+</mat-card>
+
 <mat-card appearance="outlined">
     <mat-card-content>
         <table class="user-table">
@@ -9,21 +58,22 @@
                 <th>Year</th>
                 <th><mat-icon>star_outline</mat-icon></th>
                 <th><mat-icon>local_movies</mat-icon></th>
+                <th></th>
             </tr>
 
-            @for (film of allFilms24; track $index) {
+            @for (film of (sortedFilms[currentMonth + '_' + currentYear]); track $index) {
                 <tr>
                     <td>{{ film.title }}</td>
                     <td>{{ film.rating }}</td>
                     <td>{{ film.director }}</td>
                     <td>{{ film.year }}</td>
-                    <td>@if(film.favorite){<mat-icon class="gold-star">star_outline</mat-icon>}</td>
-                    <td>@if(film.theatre){<mat-icon class="gold-star">check</mat-icon>}</td>
+                    <td>@if(film.favorite){<mat-icon class="gold-star">star</mat-icon>}</td>
+                    <td>@if(film.theatre){<mat-icon >check</mat-icon>}</td>
                     <td>
-                        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                        <button class="film-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
                         <mat-menu #menu="matMenu">
                           <button mat-menu-item>Edit</button>
-                          <button mat-menu-item>Delete</button>
+                          <button mat-menu-item (click)="deleteFilm(film.id)">Delete</button>
                         </mat-menu>
                     </td>
                 </tr>
@@ -33,6 +83,3 @@
     </mat-card-content>
 </mat-card>
 
-<button mat-fab color="primary" class="add-btn" matTooltip="Add film" [matTooltipPosition]="'above'" (click)="openDialog()">
-    <mat-icon>add</mat-icon>
-</button>

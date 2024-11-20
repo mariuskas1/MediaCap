@@ -1,8 +1,8 @@
 
 
 .add-film-dialog{
-    width: 500px;
-    padding: 24px;
+  padding: 24px;
+  
 }
 
 mat-slider{
@@ -90,7 +90,8 @@ h1{
   }
 
   mat-dialog-content{
-    overflow: hidden;
+    max-height: calc(95vh - 96px); /* Adjusts for the dialog's padding and header */
+    padding: 16px;
   }
 
   mat-dialog-actions{
@@ -98,3 +99,5 @@ h1{
     display: flex;
     justify-content: flex-end;
   }
+
+

@@ -15,7 +15,7 @@
         <div style="margin-top:8px;">
             <mat-form-field appearance="outline" class="width-100">
                 <mat-label>Title</mat-label>
-                <input matInput placeholder="Title" [(ngModel)]="film.title" [disabled]="loading">
+                <input matInput placeholder="Title" [(ngModel)]="film.title" [disabled]="loading" spellcheck="false">
             </mat-form-field>
         </div>
 
@@ -23,7 +23,7 @@
         <div>
             <mat-form-field appearance="outline" class="width-100">
                 <mat-label>Director</mat-label>
-                <input matInput placeholder="Director" [(ngModel)]="film.director" [disabled]="loading">
+                <input matInput placeholder="Director" [(ngModel)]="film.director" [disabled]="loading" spellcheck="false">
             </mat-form-field>
         </div>
            
@@ -47,7 +47,7 @@
         <div>
             <mat-form-field appearance="outline" class="width-100">
                 <mat-label>Year</mat-label>
-                <input matInput placeholder="Year" [(ngModel)]="film.year" [disabled]="loading">
+                <input matInput placeholder="Year" [(ngModel)]="film.year" [disabled]="loading" spellcheck="false">
             </mat-form-field>
         </div>
 
