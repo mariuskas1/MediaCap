@@ -56,6 +56,7 @@
                 <th>Rating</th>
                 <th>Director</th>
                 <th>Year</th>
+                <th>Genre</th>
                 <th><mat-icon>star_outline</mat-icon></th>
                 <th><mat-icon>local_movies</mat-icon></th>
                 <th></th>
@@ -67,12 +68,13 @@
                     <td>{{ film.rating }}</td>
                     <td>{{ film.director }}</td>
                     <td>{{ film.year }}</td>
+                    <td>{{ film.genres }}</td>
                     <td>@if(film.favorite){<mat-icon class="gold-star">star</mat-icon>}</td>
                     <td>@if(film.theatre){<mat-icon >check</mat-icon>}</td>
                     <td>
                         <button class="film-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
                         <mat-menu #menu="matMenu">
-                          <button mat-menu-item>Edit</button>
+                          <button mat-menu-item (click)="openEditFilmDialog(film.id)">Edit</button>
                           <button mat-menu-item (click)="deleteFilm(film.id)">Delete</button>
                         </mat-menu>
                     </td>

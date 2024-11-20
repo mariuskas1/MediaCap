@@ -29,6 +29,7 @@ h1{
 .selector-div{
     display: flex;
     justify-content: space-between;
+    width: 400px;
 }
 
 .checkbox-div{
@@ -91,7 +92,7 @@ h1{
 
   mat-dialog-content{
     max-height: calc(95vh - 96px); /* Adjusts for the dialog's padding and header */
-    padding: 16px;
+    padding: 4px;
   }
 
   mat-dialog-actions{

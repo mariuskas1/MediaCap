@@ -4,7 +4,7 @@
 
 <div class="add-film-dialog">
     <div class="dialog-header">
-        <h1 mat-dialog-title class="header-text">Add Film</h1>
+        <h1 mat-dialog-title class="header-text">Edit Film</h1>
         <div class="star-checkbox">
             <input type="checkbox" id="star" [(ngModel)]="film.favorite"/>
             <label for="star" class="star"></label>
@@ -90,7 +90,7 @@
         
     <mat-dialog-actions>
       <button  mat-flat-button [disabled]="loading" (click)="closeDialog()">Cancel</button>
-      <button  color="primary" mat-raised-button [disabled]="loading" (click)="addFilm()">Save</button>
+      <button  color="primary" mat-raised-button [disabled]="loading" (click)="editFilm()">Save</button>
     </mat-dialog-actions>
 </div>
 

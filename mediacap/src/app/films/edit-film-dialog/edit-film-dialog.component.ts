@@ -7,23 +7,21 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Film } from './../../models/film.class';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatSelectModule} from '@angular/material/select';
+import { Firestore, collection, getDoc, doc, updateDoc } from '@angular/fire/firestore';
+import { MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSliderModule} from '@angular/material/slider';
+import { MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-
-
+import { MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
-  selector: 'app-add-film-dialog',
+  selector: 'app-edit-film-dialog',
   standalone: true,
   imports: [MatCheckboxModule, MatIconModule, MatSelectModule, MatSliderModule, MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, FormsModule, MatProgressBarModule],
-  templateUrl: './add-film-dialog.component.html',
-  styleUrl: './add-film-dialog.component.scss'
+  templateUrl: './edit-film-dialog.component.html',
+  styleUrl: './edit-film-dialog.component.scss'
 })
-export class AddFilmDialogComponent {
+export class EditFilmDialogComponent {
   film: Film = new Film();
   loading = false;
 
@@ -35,6 +33,7 @@ export class AddFilmDialogComponent {
   years: number[] = [2025, 2024, 2023, 2022];
   userId: string | null = null;
   firestore: Firestore = inject(Firestore);
+  filmId: string | null = null;
 
   filmGenres: string[] = [
     'Action', 'Adventure', 'Arthouse',  'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 
@@ -42,25 +41,33 @@ export class AddFilmDialogComponent {
     'Romance', 'Sci-Fi', 'Sport', 'Suspense', 'Thriller', 'War',  'Western'
   ];
 
-  constructor(public dialogRef: MatDialogRef<AddFilmDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: { month: string; year: number; userId: string}){
-      this.film.yearWatched = data.year;
-      this.film.monthWatched = data.month;
+  constructor(public dialogRef: MatDialogRef<EditFilmDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: { filmId: string; userId: string}){ 
       this.userId = data.userId;
+      this.filmId = data.filmId;
+      this.getFilmData();
+  }
+
+  async getFilmData(){
+    try {
+      const filmDocRef = doc(this.firestore, `films/${this.userId}/userFilms/${this.filmId}`);
+      const docSnapshot = await getDoc(filmDocRef);
+      this.film = { ...this.film, ...docSnapshot.data() } as Film;
+    } catch (err) {
+      console.error('Failed to fetch film data:', err);
     }
+  }
 
-  async addFilm(){
+
+  async editFilm(){
     this.loading = true;
-    this.film.timestamp = Date.now();
-
-    try{
-      const filmsCollection = collection(this.firestore, `films/${this.userId}/userFilms` );
-      await addDoc(filmsCollection, { ...this.film});
+    try {
+      const filmDocRef = doc(this.firestore, `films/${this.userId}/userFilms/${this.filmId}`);
+      await updateDoc(filmDocRef, { ...this.film });
       this.loading = false;
-      this.film = new Film();
       this.dialogRef.close();
-    } catch (err){
-      console.error(err);
+    } catch (err) {
+      console.error('Failed to edit film:', err);
     }
   }
 
@@ -70,7 +77,4 @@ export class AddFilmDialogComponent {
   }
 
 
-  
-
- 
 }

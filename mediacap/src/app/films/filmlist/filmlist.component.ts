@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { EditFilmDialogComponent } from '../edit-film-dialog/edit-film-dialog.component';
 
 
 @Component({
@@ -57,6 +58,16 @@ export class FilmlistComponent implements OnInit{
       }
     });
   }
+
+
+  openEditFilmDialog(id:string | undefined){
+    this.dialog.open(EditFilmDialogComponent, {
+      data: {
+        userId: this.userId,
+        filmId: id,
+      }
+    });
+  }
   
 
   ngOnInit(){
@@ -64,8 +75,6 @@ export class FilmlistComponent implements OnInit{
     this.getUserId();
     this.initializeFilmArrays();
     this.getUserFilms();
-    
-
   }
 
 
