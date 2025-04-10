@@ -12,6 +12,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Book } from '../../models/book.class';
 import { Observable } from 'rxjs';
 import { Firestore, collection, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
+import { AddBookDialogComponent } from '../add-book-dialog/add-book-dialog.component';
+import { EditBookDialogComponent } from '../edit-book-dialog/edit-book-dialog.component';
 
 
 
@@ -45,13 +47,13 @@ export class BooklistComponent {
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {}
 
   openDialog(){
-      // this.dialog.open(AddFilmDialogComponent, {
-      //   data: {
-      //     month: this.currentMonth,
-      //     year: this.currentYear,
-      //     userId: this.userId,
-      //   }
-      // });
+      this.dialog.open(AddBookDialogComponent, {
+        data: {
+          month: this.currentMonth,
+          year: this.currentYear,
+          userId: this.userId,
+        }
+      });
     }
   
   
