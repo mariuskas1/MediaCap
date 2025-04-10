@@ -16,25 +16,23 @@ mat-card{
 
 
   
-
-  
   label {
-    margin-bottom: 4px; /* Space between label and select */
+    margin-bottom: 4px; 
     font-size: 14px;
-    color: #555; /* Optional: Label color */
+    color: #555; 
     margin-right: 8px;
   }
   
   .selector {
-    width: 100px; /* Width of the select element */
-    height: 32px; /* Height of the select element */
-    padding: 4px; /* Inner padding for text */
-    font-size: 14px; /* Font size */
-    color: #333; /* Text color */
-    border: 1px solid #ccc; /* Border */
-    border-radius: 4px; /* Rounded corners */
-    background-color: #fff; /* Background color */
-    appearance: none; /* Removes default arrow styles */
+    width: 100px; 
+    height: 32px; 
+    padding: 4px; 
+    font-size: 14px; 
+    color: #333; 
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    background-color: #fff; 
+    appearance: none; 
     background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns%3D%27http%3A//www.w3.org/2000/svg%27 width%3D%2710%27 height%3D%2710%27 viewBox%3D%270 0 10 10%27%3E%3Cpath d%3D%27M0 0l5 5 5-5H0z%27 fill%3D%27%23555%27/%3E%3C/svg%3E');
     background-repeat: no-repeat;
     background-position: right 8px center;
@@ -42,29 +40,28 @@ mat-card{
   }
   
   .selector:focus {
-    border-color: #007bff; /* Focus border color */
-    outline: none; /* Removes default outline */
+    border-color: #007bff; 
+    outline: none; 
   }
 
  
-
   .search-bar-container {
     display: flex;
     align-items: center;
-    gap: 8px; /* Space between input and button */
-    background-color: #fff; /* Light background */
+    gap: 8px; 
+    background-color: #fff; 
     padding-left: 8px;
     padding-right: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px; /* Rounded edges */
-    max-width: 300px; /* Adjustable width */
+    border-radius: 4px; 
+    max-width: 300px; 
     box-sizing: border-box;
     height: 32px;
     width: 40%;
   }
   
   .search-bar {
-    flex: 1; /* Take up available space */
+    flex: 1; 
     padding: 8px;
     font-size: 14px;
     border: none;
@@ -76,9 +73,6 @@ mat-card{
   
   
   
-
-
-
 
 .user-table{
     width: 100%;

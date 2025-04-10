@@ -64,6 +64,7 @@ export class LoginComponent {
     const usersCollection = collection(this.firestore, 'users');
     collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
       this.users = data;
+      console.log(this.users);
   
       if (typeof window !== 'undefined' && localStorage) {
         const rememberedUser = localStorage.getItem('rememberedUser');
