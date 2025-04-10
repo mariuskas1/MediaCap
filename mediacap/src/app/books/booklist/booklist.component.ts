@@ -61,7 +61,7 @@ export class BooklistComponent {
       // this.dialog.open(EditFilmDialogComponent, {
       //   data: {
       //     userId: this.userId,
-      //     filmId: id,
+      //     bookId: id,
       //   }
       // });
     }
@@ -70,12 +70,12 @@ export class BooklistComponent {
     ngOnInit(){
       this.setCurrentYearAndMonth();
       this.getUserId();
-      this.initializeFilmArrays();
-      this.getUserbooks();
+      this.initializeBookArrays();
+      this.getUserBooks();
     }
   
   
-    initializeFilmArrays(){
+    initializeBookArrays(){
       this.years.forEach(year => {
         this.months.forEach(month => {
           const key = `${month}_${year}`;
@@ -85,19 +85,20 @@ export class BooklistComponent {
     }
   
   
-    getUserbooks(){
-      const userbooksCollection = collection(this.firestore, `books/${this.userId}/userbooks`);
+    getUserBooks(){
+      const userbooksCollection = collection(this.firestore, `books/${this.userId}/userBooks`);
       this.books$ = collectionData(userbooksCollection, { idField: 'id' }) as Observable<Book[]>;
   
       this.books$.subscribe((changes) => {
-        this.allUserBooks = Array.from(new Map(changes.map(film => [film.id, film])).values());
-        this.populateFilmArrays();
-        this.sortFilmArrays();
+        this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
+        console.log(this.allUserBooks)
+        this.populateBookArrays();
+        this.sortBookArrays();
       })
     }
   
   
-    populateFilmArrays(){
+    populateBookArrays(){
       Object.keys(this.sortedBooks).forEach((key) => {
         this.sortedBooks[key] = []; 
       });
@@ -118,10 +119,9 @@ export class BooklistComponent {
     }
   
   
-    sortFilmArrays(){
+    sortBookArrays(){
       Object.keys(this.sortedBooks).forEach((key) => {
         this.sortedBooks[key].sort((a, b) => {
-          // Compare film timestamps
           const timestampA = new Date(a.timestamp).getTime();
           const timestampB = new Date(b.timestamp).getTime();
           return timestampA - timestampB; // Ascending order
@@ -148,8 +148,8 @@ export class BooklistComponent {
     }
   
     async deleteBook(id:string | undefined){
-      const filmDocRef = doc(this.firestore, `books/${this.userId}/userbooks/${id}`);
-      await deleteDoc(filmDocRef).catch((err) => {
+      const bookDocRef = doc(this.firestore, `books/${this.userId}/userbooks/${id}`);
+      await deleteDoc(bookDocRef).catch((err) => {
         console.error(err);
       });
     }
