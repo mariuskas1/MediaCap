@@ -38,9 +38,10 @@ export class EditBookDialogComponent {
   bookId: string | null = null;
 
   bookGenres: string[] = [
-    'Action', 'Adventure', 'Arthouse',  'Animation', 'Biography', 'Classic', 'Comedy', 'Crime', 'Documentary', 
-    'Drama', 'Family', 'Fantasy', 'History', 'Indie', 'Horror', 'Mystery', 
-    'Romance', 'Sci-Fi', 'Sport', 'Suspense', 'Thriller', 'War',  'Western'
+    'Adventure', 'Autobiography', 'Biography', 'Classic', 'Comedy', 'Crime',
+    'Drama', 'Fantasy', 'Graphic Novel', 'History', 'Horror', 'Indie',
+    'Literary', 'Memoir', 'Mystery', 'Non-fiction', 'Poetry', 'Romance',
+    'Sci-Fi', 'Sport', 'Suspense', 'Thriller', 'War', 'Western'
   ];
 
   constructor(public dialogRef: MatDialogRef<EditBookDialogComponent>, 

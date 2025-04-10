@@ -91,7 +91,6 @@ export class BooklistComponent {
   
       this.books$.subscribe((changes) => {
         this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
-        console.log(this.allUserBooks)
         this.populateBookArrays();
         this.sortBookArrays();
       })
