@@ -17,16 +17,7 @@
                 </mat-expansion-panel-header>
               </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-                <mat-expansion-panel-header >
-                  <mat-panel-title [routerLink]="['/main', userId, 'films']" ><mat-icon>theaters</mat-icon> Films </mat-panel-title>
-                </mat-expansion-panel-header>
-                <ul>
-                    <li [routerLink]="['/main', userId, 'films', 'list']"><mat-icon>grading</mat-icon>Complete List</li>
-                    <li [routerLink]="['/main', userId, 'films', 'plans']"><mat-icon>bookmark_border</mat-icon>Watch List</li>
-                    <li [routerLink]="['/main', userId, 'films', 'favorites']"><mat-icon>star_outline</mat-icon>Favorites</li>
-                </ul>
-            </mat-expansion-panel>
+            
 
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -37,6 +28,30 @@
                 <ul>
                   <li [routerLink]="['/main', userId, 'books', 'list']"><mat-icon>grading</mat-icon>Complete List</li>
                   <li [routerLink]="['/main', userId, 'books', 'plans']"><mat-icon>bookmark_border</mat-icon>Reading List</li>
+                  <li [routerLink]="['/main', userId, 'books', 'favorites']"><mat-icon>star_outline</mat-icon>Favorites</li>
+                </ul>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+              <mat-expansion-panel-header >
+                <mat-panel-title [routerLink]="['/main', userId, 'films']" ><mat-icon>theaters</mat-icon> Films </mat-panel-title>
+              </mat-expansion-panel-header>
+              <ul>
+                  <li [routerLink]="['/main', userId, 'films', 'list']"><mat-icon>grading</mat-icon>Complete List</li>
+                  <li [routerLink]="['/main', userId, 'films', 'plans']"><mat-icon>bookmark_border</mat-icon>Watch List</li>
+                  <li [routerLink]="['/main', userId, 'films', 'favorites']"><mat-icon>star_outline</mat-icon>Favorites</li>
+              </ul>
+          </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title [routerLink]="['/main', userId, 'books']">
+                    <mat-icon>tv</mat-icon> Series
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul>
+                  <li [routerLink]="['/main', userId, 'books', 'list']"><mat-icon>grading</mat-icon>Complete List</li>
+                  <li [routerLink]="['/main', userId, 'books', 'plans']"><mat-icon>bookmark_border</mat-icon>Watch List</li>
                   <li [routerLink]="['/main', userId, 'books', 'favorites']"><mat-icon>star_outline</mat-icon>Favorites</li>
                 </ul>
             </mat-expansion-panel>
