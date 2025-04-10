@@ -13,7 +13,7 @@ import { MatSliderModule} from '@angular/material/slider';
 import { MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule} from '@angular/material/checkbox';
-import { Film } from '../../models/film.class';
+
 
 @Component({
   selector: 'app-edit-book-dialog',
@@ -52,8 +52,8 @@ export class EditBookDialogComponent {
 
   async getBookData(){
     try {
-      const filmDocRef = doc(this.firestore, `books/${this.userId}/userBooks/${this.bookId}`);
-      const docSnapshot = await getDoc(filmDocRef);
+      const bookDocRef = doc(this.firestore, `books/${this.userId}/userBooks/${this.bookId}`);
+      const docSnapshot = await getDoc(bookDocRef);
       this.book = { ...this.book, ...docSnapshot.data() } as Book;
     } catch (err) {
       console.error('Failed to fetch book data:', err);
@@ -64,12 +64,12 @@ export class EditBookDialogComponent {
   async editBook(){
     this.loading = true;
     try {
-      const filmDocRef = doc(this.firestore, `films/${this.userId}/userFilms/${this.bookId}`);
-      await updateDoc(filmDocRef, { ...this.book });
+      const bookDocRef = doc(this.firestore, `books/${this.userId}/userBooks/${this.bookId}`);
+      await updateDoc(bookDocRef, { ...this.book });
       this.loading = false;
       this.dialogRef.close();
     } catch (err) {
-      console.error('Failed to edit film:', err);
+      console.error('Failed to edit book:', err);
     }
   }
 
