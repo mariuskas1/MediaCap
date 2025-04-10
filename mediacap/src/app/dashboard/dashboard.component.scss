@@ -4,7 +4,10 @@ mat-card{
 
 .large-card{
     width: 100%;
+}
 
+.large-card.half{
+    width: 50%;
 }
 
 h1{
@@ -13,6 +16,7 @@ h1{
 
 .board-container{
     margin: 16px;
+    margin-bottom: 32px;
 }
 
 .board-row{
@@ -21,4 +25,8 @@ h1{
     gap: 12px;
     width: 50%;
     margin-bottom: 12px;
+}
+
+.board-row.first{
+    margin-bottom: 32px;
 }
