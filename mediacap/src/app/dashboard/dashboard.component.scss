@@ -1,0 +1,24 @@
+mat-card{
+    width: 300px;
+}
+
+.large-card{
+    width: 100%;
+
+}
+
+h1{
+    margin-top: 12px;
+}
+
+.board-container{
+    margin: 16px;
+}
+
+.board-row{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: 50%;
+    margin-bottom: 12px;
+}
