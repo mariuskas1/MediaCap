@@ -1,1 +1,83 @@
-<p>booklist works!</p>
+
+<mat-card appearance="outlined" class="settings-card" >
+
+    <div class="selector-container">
+        <label for="year-select">Year:</label>
+        <select id="year-select" class="selector" [(ngModel)]="currentYear">
+            @for (year of years; track $index) {
+                <option [value]="year">{{ year }}</option>
+            }
+          
+        </select>
+      </div>
+    
+      <div class="selector-container" id="month">
+        <label for="month-select">Month:</label>
+        <select id="month-select" class="selector" [(ngModel)]="currentMonth">
+            @for (month of months; track $index) {
+                <option [value]="month">{{ month }}</option>
+            }
+        </select>
+      </div>
+
+      <div class="selector-container" id="month">
+        <label for="month-select">Sort by:</label>
+        <select id="month-select" class="selector" [(ngModel)]="sortBy">  
+            <option value="favorites">Favorites</option>
+            <option value="rating">Rating (Highest)</option>
+            <option value="rating">Rating (Lowest)</option>
+            
+        </select>
+      </div>
+
+      <div class="search-bar-container">
+        <input 
+          type="text" 
+          class="search-bar" 
+          placeholder="Search..." 
+          [(ngModel)]="searchQuery" 
+          (input)="onSearch(searchQuery)"
+        />
+    
+      </div>
+
+      <button mat-fab color="primary" class="add-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        </button>
+
+</mat-card>
+
+<mat-card appearance="outlined">
+    <mat-card-content>
+        <table class="user-table">
+            <tr>
+                <th>Title</th>
+                <th>Rating</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th><mat-icon>star_outline</mat-icon></th>
+                <th></th>
+            </tr>
+
+            @for (book of (sortedBooks[currentMonth + '_' + currentYear]); track $index) {
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.rating }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>@if(book.favorite){<mat-icon class="gold-star">star</mat-icon>}</td>
+                    <td>
+                        <button class="film-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="openEditBookDialog(book.id)">Edit</button>
+                          <button mat-menu-item (click)="deleteBook(book.id)">Delete</button>
+                        </mat-menu>
+                    </td>
+                </tr>
+            }
+            
+        </table>
+    </mat-card-content>
+</mat-card>
+
