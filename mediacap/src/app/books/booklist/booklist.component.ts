@@ -58,12 +58,12 @@ export class BooklistComponent {
   
   
     openEditBookDialog(id:string | undefined){
-      // this.dialog.open(EditFilmDialogComponent, {
-      //   data: {
-      //     userId: this.userId,
-      //     bookId: id,
-      //   }
-      // });
+      this.dialog.open(EditBookDialogComponent, {
+        data: {
+          userId: this.userId,
+          bookId: id,
+        }
+      });
     }
     
   
