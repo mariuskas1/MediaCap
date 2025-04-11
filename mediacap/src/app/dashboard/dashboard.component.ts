@@ -47,6 +47,8 @@ export class DashboardComponent {
 
   getBoardData(){
     this.subscibeToUserBooksCollection();
+    
+    //subscribe to films and series collections
   }
 
   subscibeToUserBooksCollection(){
@@ -54,14 +56,20 @@ export class DashboardComponent {
     this.books$ = collectionData(userBooksCollection, { idField: 'id' }) as Observable<Book[]>;
   
     this.books$.subscribe((changes) => {
-      this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
-      console.log('All User Books:', this.allUserBooks);
-      const booksReadThisYearArray = this.allUserBooks.filter((book) => book.yearRead === this.currentYear);
-      console.log('Books Read This Year:', booksReadThisYearArray);
-      this.booksReadYear = booksReadThisYearArray.length;
-      console.log('Books Read Count:', this.booksReadYear);
+      this.getBookStats(changes)
     })
   }
+
+  getBookStats(changes: Book[]){
+    this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
+    const booksReadThisYearArray = this.allUserBooks.filter((book) => book.yearRead === this.currentYear);
+    this.booksReadYear = booksReadThisYearArray.length;
+    const bookHighlightsArray = this.allUserBooks.filter((book) => book.favorite === true);
+    this.bookHighlights = bookHighlightsArray.length;
+
+    //evaluate favorite genres
+  }
+
 
   setCurrentYear(){
     const currentDate = new Date(); 
