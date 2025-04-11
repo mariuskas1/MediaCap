@@ -16,7 +16,7 @@ import {MatMenuModule} from '@angular/material/menu';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatMenuModule, RouterModule, MatToolbarModule,MatExpansionModule, MatButtonModule, MatIconModule, MatSidenavModule],
+  imports: [CommonModule, RouterOutlet, MatMenuModule, RouterModule, MatToolbarModule,MatExpansionModule, MatButtonModule, MatIconModule, MatSidenavModule, ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })

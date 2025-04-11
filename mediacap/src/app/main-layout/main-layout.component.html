@@ -9,13 +9,10 @@
       <ul class="menu-items">
         <!-- <li [routerLink]="['/dashboard', userId]" role="button"><mat-icon>fact_check</mat-icon> Dashboard</li> -->
         
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                  <mat-panel-title [routerLink]="['/main', userId, 'dashboard']" role="button">
-                    <mat-icon>fact_check</mat-icon> Dashboard
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-              </mat-expansion-panel>
+          <div class="menu-item" [routerLink]="['/main', userId, 'dashboard']" role="button">
+            <mat-icon>fact_check</mat-icon>
+            <span>Dashboard</span>
+          </div>
 
             
 
