@@ -11,6 +11,12 @@ import { BooksComponent } from './books/books.component';
 import { BooklistComponent } from './books/booklist/booklist.component';
 import { BookplansComponent } from './books/bookplans/bookplans.component';
 import { BookfavoritesComponent } from './books/bookfavorites/bookfavorites.component';
+import { SeriesComponent } from './series/series.component';
+import { SerieslistComponent } from './series/serieslist/serieslist.component';
+import { SeriesplansComponent } from './series/seriesplans/seriesplans.component';
+import { SeriesfavoritesComponent } from './series/seriesfavorites/seriesfavorites.component';
+
+
 
 export const routes: Routes = [
     { 
@@ -26,6 +32,7 @@ export const routes: Routes = [
       children: [
         { path: '', component: DashboardComponent },
         { path: 'dashboard', component: DashboardComponent }, 
+        
         { path: 'films', component: FilmsComponent }, 
         { path: 'films/list', component: FilmlistComponent }, 
         { path: 'films/plans', component: PlansComponent }, 
@@ -35,6 +42,12 @@ export const routes: Routes = [
         { path: 'books/list', component: BooklistComponent }, 
         { path: 'books/plans', component: BookplansComponent }, 
         { path: 'books/favorites', component: BookfavoritesComponent },
+
+        { path: 'series', component: SeriesComponent }, 
+        { path: 'series/list', component: SerieslistComponent }, 
+        { path: 'series/plans', component: SeriesplansComponent }, 
+        { path: 'series/favorites', component: SeriesfavoritesComponent },
+
       ],
     },
   ];
