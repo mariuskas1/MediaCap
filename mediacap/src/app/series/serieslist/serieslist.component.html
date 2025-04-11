@@ -41,7 +41,7 @@
     
       </div>
 
-      <button mat-fab color="primary" class="add-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="openDialog()">
+      <button mat-fab color="primary" class="add-btn" matTooltip="Add series" [matTooltipPosition]="'above'" (click)="openDialog()">
         <mat-icon>add</mat-icon>
         </button>
 
@@ -53,26 +53,24 @@
             <tr>
                 <th>Title</th>
                 <th>Rating</th>
-                <th>Author</th>
                 <th>Year</th>
                 <th>Genre</th>
                 <th><mat-icon>star_outline</mat-icon></th>
                 <th></th>
             </tr>
 
-            @for (book of (sortedBooks[currentMonth + '_' + currentYear]); track $index) {
+            @for (series of (sortedSeries[currentMonth + '_' + currentYear]); track $index) {
                 <tr>
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.rating }}</td>
-                    <td>{{ book.author }}</td>
-                    <td>{{ book.year }}</td>
-                    <td>{{ book.genres }}</td>
-                    <td>@if(book.favorite){<mat-icon class="gold-star">star</mat-icon>}</td>
+                    <td>{{ series.title }}</td>
+                    <td>{{ series.rating }}</td>
+                    <td>{{ series.year }}</td>
+                    <td>{{ series.genres }}</td>
+                    <td>@if(series.favorite){<mat-icon class="gold-star">star</mat-icon>}</td>
                     <td>
                         <button class="film-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
                         <mat-menu #menu="matMenu">
-                          <button mat-menu-item (click)="openEditBookDialog(book.id)">Edit</button>
-                          <button mat-menu-item (click)="deleteBook(book.id)">Delete</button>
+                          <button mat-menu-item (click)="openEditSeriesDialog(series.id)">Edit</button>
+                          <button mat-menu-item (click)="deleteSeries(series.id)">Delete</button>
                         </mat-menu>
                     </td>
                 </tr>
