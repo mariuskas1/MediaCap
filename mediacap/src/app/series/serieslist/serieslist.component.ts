@@ -127,6 +127,7 @@ export class SerieslistComponent {
         return timestampA - timestampB; // Ascending order
       });
     });
+    console.log(this.sortedSeries)
   }
 
 
