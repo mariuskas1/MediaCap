@@ -3,10 +3,11 @@
     box-sizing: border-box;
 }
 
-@mixin displayFlex($jc: center, $ai: center){
+@mixin displayFlex($jc: center, $ai: center, $fd: column){
     display: flex;
     justify-content: $jc;
     align-items: $ai;
+    flex-direction: $fd;
 }
 
 .mt-8{

@@ -1,32 +1,38 @@
+@import './../../styles.scss';
+
+.board-container{
+    @include displayFlex($fd: row, $jc: flex-start, $ai: flex-start);
+    width: 100%;
+
+}
+
+.main-row{
+    @include displayFlex($fd: row);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.main-row.last{
+    margin-bottom: 40px;
+}
+
 mat-card{
-    width: 300px;
+    width: 200px;
 }
 
 .large-card{
     width: 100%;
 }
 
-.large-card.half{
-    width: 50%;
+.board-secondary{
+    width: 400px;
+    @include displayFlex($fd: column, $ai: flex-start);
+    gap: 16px;
+    margin-left: 120px;
+    margin-top: 80px ;
+
 }
 
-h1{
-    margin-top: 12px;
-}
-
-.board-container{
-    margin: 16px;
-    margin-bottom: 32px;
-}
-
-.board-row{
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    width: 50%;
-    margin-bottom: 12px;
-}
-
-.board-row.first{
-    margin-bottom: 32px;
+.secondary-card{
+    width: 100%;
 }
