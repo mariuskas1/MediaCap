@@ -11,14 +11,6 @@
         </select>
       </div>
     
-      <div class="selector-container" id="month">
-        <label for="month-select">Month:</label>
-        <select id="month-select" class="selector" [(ngModel)]="currentMonth">
-            @for (month of months; track $index) {
-                <option [value]="month">{{ month }}</option>
-            }
-        </select>
-      </div>
 
       <div class="selector-container" id="month">
         <label for="month-select">Sort by:</label>
@@ -59,7 +51,7 @@
                 <th></th>
             </tr>
 
-            @for (series of (sortedSeries[currentMonth + '_' + currentYear]); track $index) {
+            @for (series of allUserSeries; track $index) {
                 <tr>
                     <td>{{ series.title }}</td>
                     <td>{{ series.rating }}</td>
