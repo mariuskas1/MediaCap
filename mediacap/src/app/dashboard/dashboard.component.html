@@ -28,8 +28,12 @@
 
       <mat-card >
         <mat-card-header>
-          @for (genre of favoriteBookGenres; track $index) {
-           <span class="genre-span">{{genre}}</span>
+          @if (favoriteBookGenres.length > 0) {
+            @for (genre of favoriteBookGenres; track $index) {
+              <span class="genre-span">{{genre}}</span>
+            }
+          } @else {
+            <span class="genre-span">-</span>
           }
         </mat-card-header>
       
@@ -80,9 +84,14 @@
 
       <mat-card >
         <mat-card-header>
-          @for (genre of favoriteBookGenres; track $index) {
-            <mat-card-title>{{genre}}</mat-card-title>
+          @if (favoriteFilmGenres.length > 0) {
+            @for (genre of favoriteFilmGenres; track $index) {
+              <span class="genre-span">{{genre}}</span>
+            }
+          } @else {
+            <span class="genre-span">-</span>
           }
+          
         </mat-card-header>
       
         <mat-card-content>
