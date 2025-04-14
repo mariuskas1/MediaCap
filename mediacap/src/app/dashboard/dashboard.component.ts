@@ -24,10 +24,14 @@ export class DashboardComponent {
 
   booksReadYear?: number; 
   bookHighlights?: number;
-  bookGenres?: string[];
+  bookGenresMap: { [genre: string]: Book[] } = {};
+  favoriteBookGenres: string[] = [];
+
   filmsWatchedYear?: number; 
   filmHighlights?: number;
-  filmGenres?: string[];
+  filmGenresMap: { [genre: string]: Film[] } = {};
+  favoriteFilmGenres: string[] = [];
+
   seriesWatchedYear?: number;
   seriesHighlights?: number;
   
@@ -100,6 +104,32 @@ export class DashboardComponent {
     this.bookHighlights = bookHighlightsArray.length;
 
     //evaluate favorite genres
+    this.sortBooksAfterGenres();
+  }
+
+  sortBooksAfterGenres(){
+    this.allUserBooks.forEach(book => {
+      if (Array.isArray(book.genres)) {
+        book.genres.forEach(genre => {
+          if (!this.bookGenresMap[genre]) {
+            this.bookGenresMap[genre] = [];
+          }
+          this.bookGenresMap[genre].push(book);
+        });
+      }
+    });
+
+    this.determineFavoriteBookGenres();
+  }
+
+  determineFavoriteBookGenres(){
+    const genreCounts = Object.entries(this.bookGenresMap).map(
+      ([genre, books]) => ({ genre, count: books.length })
+    );
+
+    genreCounts.sort((a, b) => b.count - a.count);
+    const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
+    this.favoriteBookGenres = topGenres;
   }
 
 
