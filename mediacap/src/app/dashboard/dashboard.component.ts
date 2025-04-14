@@ -103,13 +103,13 @@ export class DashboardComponent {
     const bookHighlightsArray = booksReadThisYearArray.filter((book) => book.favorite === true);
     this.bookHighlights = bookHighlightsArray.length;
 
-    this.sortBooksAfterGenres();
+    this.sortBooksAfterGenres(booksReadThisYearArray);
   }
 
-  sortBooksAfterGenres(){
+  sortBooksAfterGenres(booksReadThisYearArray: Book[]){
     this.bookGenresMap = {};
-    
-    this.allUserBooks.forEach(book => {
+
+    booksReadThisYearArray.forEach(book => {
       if (Array.isArray(book.genres)) {
         book.genres.forEach(genre => {
           if (!this.bookGenresMap[genre]) {
@@ -141,13 +141,13 @@ export class DashboardComponent {
     const filmHighlightsArray = filmsWatchedThisYearArray.filter((film) => film.favorite === true);
     this.filmHighlights = filmHighlightsArray.length;
 
-    this.sortFilmsAfterGenres();
+    this.sortFilmsAfterGenres(filmsWatchedThisYearArray);
   }
 
-  sortFilmsAfterGenres() {
+  sortFilmsAfterGenres(filmsWatchedThisYearArray: Film[]) {
     this.filmGenresMap = {};
   
-    this.allUserFilms.forEach(film => {
+    filmsWatchedThisYearArray.forEach(film => {
       if (Array.isArray(film.genres)) {
         film.genres.forEach(genre => {
           if (!this.filmGenresMap[genre]) {
@@ -170,7 +170,6 @@ export class DashboardComponent {
     const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
     this.favoriteFilmGenres = topGenres;
   
-    console.log("Favorite Film Genres:", this.favoriteFilmGenres);
   }
 
   getSeriesStats(changes: Series[]){
