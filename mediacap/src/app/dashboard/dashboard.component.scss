@@ -35,6 +35,10 @@ mat-card-title{
     
 }
 
+.normal-card{
+    height: 150px;
+}
+
 .large-card{
     width: 100%;
 }
@@ -56,4 +60,10 @@ mat-card-title{
 .genre-span{
     font-weight: 500;
     font-size: 16px;
+    display: block;
+}
+
+.genre-div{
+    @include displayFlex($fd: column);
+    margin-bottom: 8px;
 }

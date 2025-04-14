@@ -4,7 +4,7 @@
     <h1>Books</h1>
 
     <div class="main-row">
-      <mat-card >
+      <mat-card class="normal-card">
         <mat-card-header>
           <mat-card-title><mat-icon>menu_book</mat-icon> <span class="card-number">{{booksReadYear}}</span> </mat-card-title>
         </mat-card-header>
@@ -15,7 +15,7 @@
       
       </mat-card>
 
-      <mat-card >
+      <mat-card class="normal-card">
         <mat-card-header>
           <mat-card-title><mat-icon>star_outline</mat-icon> <span class="card-number">{{bookHighlights}}</span></mat-card-title>
         </mat-card-header>
@@ -26,12 +26,14 @@
       
       </mat-card>
 
-      <mat-card >
+      <mat-card class="normal-card">
         <mat-card-header>
           @if (favoriteBookGenres.length > 0) {
-            @for (genre of favoriteBookGenres; track $index) {
-              <span class="genre-span">{{genre}}</span>
-            }
+            <div class="genre-div">
+              @for (genre of favoriteBookGenres; track $index) {
+                <span class="genre-span">{{genre}}</span>
+              }
+            </div>
           } @else {
             <span class="genre-span">-</span>
           }
@@ -60,7 +62,7 @@
     <h1>Films</h1>
 
     <div class="main-row">
-      <mat-card >
+      <mat-card class="normal-card">
         <mat-card-header>
           <mat-card-title><mat-icon>theaters</mat-icon> <span class="card-number">{{filmsWatchedYear}}</span> </mat-card-title>
         </mat-card-header>
@@ -71,7 +73,7 @@
       
       </mat-card>
 
-      <mat-card >
+      <mat-card class="normal-card">
         <mat-card-header>
           <mat-card-title><mat-icon>star_outline</mat-icon> <span class="card-number">{{filmHighlights}}</span> </mat-card-title>
         </mat-card-header>
@@ -82,12 +84,15 @@
       
       </mat-card>
 
-      <mat-card >
+      <mat-card class="normal-card">
         <mat-card-header>
           @if (favoriteFilmGenres.length > 0) {
-            @for (genre of favoriteFilmGenres; track $index) {
-              <span class="genre-span">{{genre}}</span>
-            }
+            <div class="genre-div">
+              @for (genre of favoriteFilmGenres; track $index) {
+                <span class="genre-span">{{genre}}</span>
+              }
+            </div>
+            
           } @else {
             <span class="genre-span">-</span>
           }
