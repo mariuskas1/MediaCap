@@ -77,7 +77,12 @@ export class DashboardComponent {
   }
 
   subscribeToUserSeriesCollection(){
-
+    const userSeriesCollection = collection(this.firestore, `series/${this.userId}/userSeries`);
+    this.series$ = collectionData(userSeriesCollection, { idField: 'id' }) as Observable<Series[]>;
+  
+    this.series$.subscribe((changes) => {
+      this.getSeriesStats(changes);
+    })
   }
 
 
@@ -94,6 +99,10 @@ export class DashboardComponent {
 
   getFilmStats(changes: Film[]){
     this.allUserFilms
+  }
+
+  getSeriesStats(changes: Series[]){
+    
   }
 
 
