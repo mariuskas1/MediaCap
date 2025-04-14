@@ -4,6 +4,8 @@ import { Firestore, collection, collectionData, doc, docData } from '@angular/fi
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book.class';
+import { Film } from '../models/film.class';
+import { Series } from '../models/series.class';
 
 
 @Component({
@@ -27,6 +29,10 @@ export class DashboardComponent {
 
   books$!: Observable<Book[]>;
   allUserBooks: Book[] = [];
+  films$!: Observable<Film[]>;
+  allUserFilms: Film[] = [];
+  series$!: Observable<Series[]>;
+  allUserSeries: Series[] = [];
 
 
 
@@ -46,19 +52,35 @@ export class DashboardComponent {
   }
 
   getBoardData(){
-    this.subscibeToUserBooksCollection();
+    this.subscribeToUserBooksCollection();
+    this.subscribeToUserFilmsCollection();
+    this.subscribeToUserSeriesCollection();
     
-    //subscribe to films and series collections
   }
 
-  subscibeToUserBooksCollection(){
+  subscribeToUserBooksCollection(){
     const userBooksCollection = collection(this.firestore, `books/${this.userId}/userBooks`);
     this.books$ = collectionData(userBooksCollection, { idField: 'id' }) as Observable<Book[]>;
   
     this.books$.subscribe((changes) => {
-      this.getBookStats(changes)
+      this.getBookStats(changes);
     })
   }
+
+  subscribeToUserFilmsCollection(){
+    const userFilmsCollection = collection(this.firestore, `films/${this.userId}/userFilms`);
+    this.films$ = collectionData(userFilmsCollection, { idField: 'id' }) as Observable<Film[]>;
+  
+    this.films$.subscribe((changes) => {
+      this.getFilmStats(changes);
+    })
+  }
+
+  subscribeToUserSeriesCollection(){
+
+  }
+
+
 
   getBookStats(changes: Book[]){
     this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
@@ -68,6 +90,10 @@ export class DashboardComponent {
     this.bookHighlights = bookHighlightsArray.length;
 
     //evaluate favorite genres
+  }
+
+  getFilmStats(changes: Film[]){
+    this.allUserFilms
   }
 
 
