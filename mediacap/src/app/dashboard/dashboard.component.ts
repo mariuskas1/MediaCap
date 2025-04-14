@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import { Book } from '../models/book.class';
 import { Film } from '../models/film.class';
 import { Series } from '../models/series.class';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ MatCardModule],
+  imports: [ MatCardModule, MatIcon],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -101,6 +102,7 @@ export class DashboardComponent {
     //evaluate favorite genres
   }
 
+
   getFilmStats(changes: Film[]){
     this.allUserFilms = Array.from(new Map(changes.map(film => [film.id, film])).values());
     const filmsWatchedThisYearArray = this.allUserFilms.filter((film) => film.yearWatched === this.currentYear);
@@ -108,6 +110,7 @@ export class DashboardComponent {
     const filmHighlightsArray = filmsWatchedThisYearArray.filter((film) => film.favorite === true);
     this.filmHighlights = filmHighlightsArray.length;
   }
+
 
   getSeriesStats(changes: Series[]){
     this.allUserSeries = Array.from(new Map(changes.map(series => [series.id, series])).values());
