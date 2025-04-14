@@ -19,6 +19,7 @@ export class DashboardComponent {
 
   userId: string | null = null;
   currentYear?: number;
+  currentMonth?: string;
 
   booksReadYear?: number; 
   bookHighlights?: number;
@@ -26,6 +27,9 @@ export class DashboardComponent {
   filmsWatchedYear?: number; 
   filmHighlights?: number;
   filmGenres?: string[];
+  seriesWatchedYear?: number;
+  seriesHighlights?: number;
+  
 
   books$!: Observable<Book[]>;
   allUserBooks: Book[] = [];
@@ -91,23 +95,31 @@ export class DashboardComponent {
     this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
     const booksReadThisYearArray = this.allUserBooks.filter((book) => book.yearRead === this.currentYear);
     this.booksReadYear = booksReadThisYearArray.length;
-    const bookHighlightsArray = this.allUserBooks.filter((book) => book.favorite === true);
+    const bookHighlightsArray = booksReadThisYearArray.filter((book) => book.favorite === true);
     this.bookHighlights = bookHighlightsArray.length;
 
     //evaluate favorite genres
   }
 
   getFilmStats(changes: Film[]){
-    this.allUserFilms
+    this.allUserFilms = Array.from(new Map(changes.map(film => [film.id, film])).values());
+    const filmsWatchedThisYearArray = this.allUserFilms.filter((film) => film.yearWatched === this.currentYear);
+    this.filmsWatchedYear = filmsWatchedThisYearArray.length;
+    const filmHighlightsArray = filmsWatchedThisYearArray.filter((film) => film.favorite === true);
+    this.filmHighlights = filmHighlightsArray.length;
   }
 
   getSeriesStats(changes: Series[]){
-    
+    this.allUserSeries = Array.from(new Map(changes.map(series => [series.id, series])).values());
+    const seriesWatchedThisYearArray = this.allUserSeries.filter((series) => series.yearWatched === this.currentYear);
+    this.seriesWatchedYear = seriesWatchedThisYearArray.length;
   }
 
 
   setCurrentYear(){
     const currentDate = new Date(); 
     this.currentYear = currentDate.getFullYear(); 
+    this.currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+
   }
 }
