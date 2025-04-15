@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Firestore, addDoc, collection, collectionData, doc, docData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData, deleteDoc } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
@@ -246,9 +246,17 @@ export class DashboardComponent {
 
   }
 
-  deleteCurrentBook(){
-    
+
+  async deleteCurrentBook(bookId: string){
+    try {
+      const bookDocRef = doc(this.firestore, `books/${this.userId}/currentBooks/${bookId}`);
+      await deleteDoc(bookDocRef);
+      this.selectedOptionsIndex = null;
+    } catch (error) {
+      console.error('Error deleting book:', error);
+    }
   }
+
 
   showOptions(index:number){
     if (this.selectedOptionsIndex === index) {

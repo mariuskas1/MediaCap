@@ -142,7 +142,7 @@
             @if(selectedOptionsIndex === $index){
               <div class="current-entry-options-div" (mouseleave)="hideOptions()">
                 <div class="current-entry-option">Edit</div>
-                <div class="current-entry-option">Delete</div>
+                <div class="current-entry-option" (click)="deleteCurrentBook(book.id!)">Delete</div>
                 <div class="current-entry-option">Finished</div>
               </div>
             }
