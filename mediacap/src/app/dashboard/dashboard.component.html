@@ -123,11 +123,11 @@
 
 
   <div class="board-secondary">
-    <mat-card class="secondary-card current-books-card">
+    <mat-card class="secondary-card current-books-card" (mouseleave)="toggleAddBookInput()">
       <mat-card-header>
         <mat-card-title>
           Currently Reading 
-          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="addBook()">
+          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="toggleAddBookInput()">
             <mat-icon>add</mat-icon>
           </button>
       </mat-card-title>
@@ -138,10 +138,13 @@
           <input type="text" class="current-input" value="Creation Lake" disabled>
           <mat-icon class="current-option-btn">more_horiz</mat-icon>
         </div>
-        <div class="current-entry-div">
-          <input type="text" class="add-current-input" placeholder="Add book title">
-          <mat-icon class="current-option-btn">check</mat-icon>
-        </div>
+        @if (showAddBookInput) {
+          <div class="current-entry-div add">
+            <input type="text" class="current-input add-current-input" placeholder="Add book title">
+            <mat-icon class="current-option-btn">check</mat-icon>
+          </div>
+        }
+        
 
       </mat-card-content>
     

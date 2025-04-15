@@ -50,6 +50,7 @@ export class DashboardComponent {
   allUserSeries: Series[] = [];
 
   newBook?:string;
+  showAddBookInput = false;
 
 
   constructor(private route: ActivatedRoute, private firestore: Firestore){}
@@ -194,8 +195,8 @@ export class DashboardComponent {
   }
 
 
-  addBook(){
-
+  toggleAddBookInput(){
+    this.showAddBookInput = !this.showAddBookInput;
   }
 
   openAddBookDialog(){
