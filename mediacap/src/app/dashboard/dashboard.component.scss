@@ -49,7 +49,7 @@ mat-card-title{
     @include displayFlex($fd: column, $ai: flex-start);
     gap: 24px;
     margin-left: 150px;
-    margin-top: 55px ;
+    margin-top: 50px ;
 }
 
 .secondary-card{
@@ -159,5 +159,13 @@ mat-card-content{
 @media(max-width: 1600px){
     .board-secondary{
         margin-left: 100px;
+    }
+}
+@media(max-width: 1500px){
+    .board-secondary{
+        margin-left: 50px;
+    }
+    .secondary-card{
+        width: 350px;
     }
 }
