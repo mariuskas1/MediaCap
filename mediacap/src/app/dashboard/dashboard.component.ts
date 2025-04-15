@@ -49,7 +49,9 @@ export class DashboardComponent {
   series$!: Observable<Series[]>;
   allUserSeries: Series[] = [];
 
-  newCurrentBook = {title: ''};
+  currentBooks$!: Observable<Book[]>;
+  currentBooks: Book[] = [];
+  newCurrentBook = new Book();
   showAddBookInput = false;
 
 
@@ -72,7 +74,8 @@ export class DashboardComponent {
     this.subscribeToUserBooksCollection();
     this.subscribeToUserFilmsCollection();
     this.subscribeToUserSeriesCollection();
-    
+    this.subscribeToCurrentBooksCollection();
+    this.subscribeToCurrentSeriesCollection();
   }
 
   subscribeToUserBooksCollection(){
@@ -82,6 +85,19 @@ export class DashboardComponent {
     this.books$.subscribe((changes) => {
       this.getBookStats(changes);
     })
+  }
+
+  subscribeToCurrentBooksCollection(){
+    const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
+    this.currentBooks$ = collectionData(currentBooksCollection, { idField: 'id' }) as Observable<Book[]>;
+  
+    this.currentBooks$.subscribe((changes) => {
+      this.currentBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
+    })
+  }
+
+  subscribeToCurrentSeriesCollection(){
+
   }
 
   subscribeToUserFilmsCollection(){
@@ -198,7 +214,7 @@ export class DashboardComponent {
     try{
       const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
       await addDoc(currentBooksCollection, { ...this.newCurrentBook});
-      this.newCurrentBook = {title: ''};
+      this.newCurrentBook = new Book();
     } catch (err){
       console.error(err);
     }

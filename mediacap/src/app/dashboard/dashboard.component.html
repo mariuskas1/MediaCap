@@ -134,10 +134,13 @@
       </mat-card-header>
     
       <mat-card-content class="current-content">
-        <div class="current-entry-div">
-          <input type="text" class="current-input" value="Creation Lake" disabled>
-          <mat-icon class="current-option-btn">more_horiz</mat-icon>
-        </div>
+        @for (book of currentBooks; track $index) {
+          <div class="current-entry-div">
+            <input type="text" class="current-input" value={{book.title}} disabled>
+            <mat-icon class="current-option-btn">more_horiz</mat-icon>
+          </div>
+        }
+        
         @if (showAddBookInput) {
           <div class="current-entry-div add">
             <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title">
