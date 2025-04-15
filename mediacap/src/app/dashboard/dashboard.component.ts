@@ -211,13 +211,16 @@ export class DashboardComponent {
   }
 
   async addBook(){
-    try{
-      const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
-      await addDoc(currentBooksCollection, { ...this.newCurrentBook});
-      this.newCurrentBook = new Book();
-    } catch (err){
-      console.error(err);
+    if(this.newCurrentBook.title.length > 0){
+      try{
+        const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
+        await addDoc(currentBooksCollection, { ...this.newCurrentBook});
+        this.newCurrentBook = new Book();
+      } catch (err){
+        console.error(err);
+      }
     }
+    
   }
 
  

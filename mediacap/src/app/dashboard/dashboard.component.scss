@@ -50,13 +50,12 @@ mat-card-title{
     gap: 24px;
     margin-left: 150px;
     margin-top: 55px ;
-
 }
 
 .secondary-card{
     position: relative;
-    width: 100%;
-    height: 240px;
+    width: 400px;
+    // height: 240px;
     @include displayFlex($jc: flex-start);
 }
 
@@ -140,9 +139,9 @@ mat-card-content{
 }
 
 .current-entry-div.add{
-    position: absolute;
-    bottom: 16px;
-    width: 60%;
+    // position: absolute;
+    // bottom: 16px;
+    width: 100%;
     @include displayFlex($fd:row, $ai: center);
 }
 
@@ -153,5 +152,12 @@ mat-card-content{
     &:hover{
         cursor: pointer;
         scale: 1.02;
+    }
+}
+
+
+@media(max-width: 1600px){
+    .board-secondary{
+        margin-left: 100px;
     }
 }
