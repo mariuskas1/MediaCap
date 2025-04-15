@@ -28,6 +28,7 @@ mat-card{
 
 mat-card-title{
     @include displayFlex($fd:row);
+    position: relative;
 }
 
 .card-number{
@@ -66,4 +67,60 @@ mat-card-title{
 .genre-div{
     @include displayFlex($fd: column);
     margin-bottom: 8px;
+}
+
+.add-btn{
+   position: absolute;
+   left: 170px;
+   display: none;
+   transition: all 125ms ease;
+}
+
+.current-books-card:hover .add-book-btn{
+    display: block;
+}
+
+mat-card-content{
+    @include displayFlex($ai: center);
+}
+
+.current-content{
+    padding: none;
+    @include displayFlex();
+    // border: 1px solid red;
+}
+
+.current-entry-div{
+    @include displayFlex($fd:row, $jc: space-between);
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    margin: 8px;
+
+    &:hover{
+        background-color: rgb(240, 240, 240);
+    }
+
+    &:hover .current-input{
+        background-color: rgb(240, 240, 240);
+    }
+}
+
+.current-option-btn{
+    width: 20px;
+    margin-left: 24px;
+    margin-right: 8px;
+    transition: all;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.current-input{
+    border: none;
+    background-color: white;
+    width: 140px;
+    text-align: center;
+    font-size: 16px;
 }

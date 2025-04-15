@@ -7,12 +7,19 @@ import { Book } from '../models/book.class';
 import { Film } from '../models/film.class';
 import { Series } from '../models/series.class';
 import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ MatCardModule, MatIcon],
+  imports: [ MatCardModule, MatIcon, MatButtonModule, MatTooltipModule, MatListModule, FormsModule, MatInputModule, MatMenuModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -34,7 +41,6 @@ export class DashboardComponent {
 
   seriesWatchedYear?: number;
   seriesHighlights?: number;
-  
 
   books$!: Observable<Book[]>;
   allUserBooks: Book[] = [];
@@ -43,6 +49,7 @@ export class DashboardComponent {
   series$!: Observable<Series[]>;
   allUserSeries: Series[] = [];
 
+  newBook?:string;
 
 
   constructor(private route: ActivatedRoute, private firestore: Firestore){}
@@ -184,5 +191,22 @@ export class DashboardComponent {
     this.currentYear = currentDate.getFullYear(); 
     this.currentMonth = currentDate.toLocaleString('default', { month: 'long' });
 
+  }
+
+
+  addBook(){
+
+  }
+
+  openAddBookDialog(){
+
+  }
+
+  editCurrentBook(){
+
+  }
+
+  deleteCurrentBook(){
+    
   }
 }
