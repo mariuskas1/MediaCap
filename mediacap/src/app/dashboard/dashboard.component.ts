@@ -199,6 +199,12 @@ export class DashboardComponent {
     this.showAddBookInput = !this.showAddBookInput;
   }
 
+  hideAddBookInput(){
+    setTimeout(() => {
+      
+    }, 50);
+  }
+
   openAddBookDialog(){
 
   }

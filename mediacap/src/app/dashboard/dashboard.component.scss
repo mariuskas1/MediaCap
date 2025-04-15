@@ -136,11 +136,22 @@ mat-card-content{
     border: 1px solid lightgray;
     border-radius: 8px;
     padding: 4px;
+    margin-right: 12px;
 }
 
 .current-entry-div.add{
     position: absolute;
     bottom: 16px;
     width: 60%;
+    @include displayFlex($fd:row, $ai: center);
 }
 
+.add-current-entry-icon{
+    font-size: 20px;
+    // transition: all 125ms ease;
+
+    &:hover{
+        cursor: pointer;
+        scale: 1.02;
+    }
+}

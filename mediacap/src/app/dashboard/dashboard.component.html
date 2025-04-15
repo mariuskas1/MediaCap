@@ -141,7 +141,8 @@
         @if (showAddBookInput) {
           <div class="current-entry-div add">
             <input type="text" class="current-input add-current-input" placeholder="Add book title">
-            <mat-icon class="current-option-btn">check</mat-icon>
+            <mat-icon class="add-current-entry-icon">check</mat-icon>
+            <mat-icon class="add-current-entry-icon" (onclick)="hideAddBookInput()">close</mat-icon>
           </div>
         }
         
