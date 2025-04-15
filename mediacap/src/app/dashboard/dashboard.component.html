@@ -123,7 +123,7 @@
 
 
   <div class="board-secondary">
-    <mat-card class="secondary-card current-books-card" (mouseleave)="showAddBookInput=false;">
+    <mat-card class="secondary-card current-books-card" (mouseleave)="hideAddBookInputDiv()">
       <mat-card-header>
         <mat-card-title>
           Currently Reading 
@@ -145,7 +145,7 @@
           <div class="current-entry-div add">
             <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title" #addBookInput>
             <mat-icon class="add-current-entry-icon" (click)="addBook()">check</mat-icon>
-            <mat-icon class="add-current-entry-icon" (click)="showAddBookInput=false;">close</mat-icon>
+            <mat-icon class="add-current-entry-icon" (click)="hideAddBookInputDiv()">close</mat-icon>
           </div>
         }
         

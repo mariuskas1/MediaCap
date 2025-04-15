@@ -225,12 +225,17 @@ export class DashboardComponent {
     
   }
 
- showAddBookInputDiv(){
-  this.showAddBookInput = true;
-  setTimeout(() => {
-    this.addBookInput?.nativeElement?.focus();
-  }, 50);
- }
+  showAddBookInputDiv(){
+    this.showAddBookInput = true;
+    setTimeout(() => {
+      this.addBookInput?.nativeElement?.focus();
+    }, 50);
+  }
+
+  hideAddBookInputDiv(){
+    this.showAddBookInput = false;
+    this.newCurrentBook.title = '';
+  }
 
   openAddBookDialog(){
 
