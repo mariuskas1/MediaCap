@@ -55,8 +55,8 @@ export class AddBookDialogComponent {
     this.book.timestamp = Date.now();
 
     try{
-      const filmsCollection = collection(this.firestore, `books/${this.userId}/userBooks` );
-      await addDoc(filmsCollection, { ...this.book});
+      const booksCollection = collection(this.firestore, `books/${this.userId}/userBooks` );
+      await addDoc(booksCollection, { ...this.book});
       this.loading = false;
       this.book = new Book();
       this.dialogRef.close();

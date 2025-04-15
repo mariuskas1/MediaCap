@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Firestore, collection, collectionData, doc, docData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { Book } from '../models/book.class';
@@ -49,7 +49,7 @@ export class DashboardComponent {
   series$!: Observable<Series[]>;
   allUserSeries: Series[] = [];
 
-  newBook?:string;
+  newCurrentBook = {title: ''};
   showAddBookInput = false;
 
 
@@ -194,6 +194,15 @@ export class DashboardComponent {
 
   }
 
+  async addBook(){
+    try{
+      const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
+      await addDoc(currentBooksCollection, { ...this.newCurrentBook});
+      this.newCurrentBook = {title: ''};
+    } catch (err){
+      console.error(err);
+    }
+  }
 
  
   openAddBookDialog(){
