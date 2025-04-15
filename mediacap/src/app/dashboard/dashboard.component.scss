@@ -97,6 +97,7 @@ mat-card-content{
     width: 100%;
     border-radius: 8px;
     margin: 8px;
+    position: relative;
 
     &:hover{
         background-color: rgb(240, 240, 240);
@@ -167,5 +168,24 @@ mat-card-content{
     }
     .secondary-card{
         width: 350px;
+    }
+}
+
+.current-entry-options-div{
+    position: absolute;
+    right: -90px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 8px 0;
+}
+
+.current-entry-option{
+    width: 100%;
+    padding: 4px 16px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(240, 240, 240);
     }
 }

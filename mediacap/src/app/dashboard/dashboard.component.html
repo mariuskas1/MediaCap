@@ -137,13 +137,22 @@
         @for (book of currentBooks; track $index) {
           <div class="current-entry-div">
             <input type="text" class="current-input" value={{book.title}} disabled>
-            <mat-icon class="current-option-btn">more_horiz</mat-icon>
+            <mat-icon class="current-option-btn" (click)="showOptions($index)">more_horiz</mat-icon>
+
+            @if(selectedOptionsIndex === $index){
+              <div class="current-entry-options-div">
+                <div class="current-entry-option">Edit</div>
+                <div class="current-entry-option">Delete</div>
+                <div class="current-entry-option">Finished</div>
+              </div>
+            }
+            
           </div>
         }
         
         @if (showAddBookInput) {
           <div class="current-entry-div add">
-            <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title" #addBookInput>
+            <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title" #addBookInput (keydown.enter)="addBook()">
             <mat-icon class="add-current-entry-icon" (click)="addBook()">check</mat-icon>
             <mat-icon class="add-current-entry-icon" (click)="hideAddBookInputDiv()">close</mat-icon>
           </div>

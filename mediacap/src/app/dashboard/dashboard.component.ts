@@ -26,6 +26,7 @@ import { MatMenu, MatMenuModule } from '@angular/material/menu';
 })
 export class DashboardComponent {
   @ViewChild('addBookInput') addBookInput!: ElementRef<HTMLInputElement>;
+  selectedOptionsIndex: number | null = 0;
 
   userId: string | null = null;
   currentYear?: number;
@@ -247,5 +248,14 @@ export class DashboardComponent {
 
   deleteCurrentBook(){
     
+  }
+
+  showOptions(index:number){
+    if (this.selectedOptionsIndex === index) {
+      // Close the options if clicked again
+      this.selectedOptionsIndex = null;
+    } else {
+      this.selectedOptionsIndex = index;
+    }
   }
 }
