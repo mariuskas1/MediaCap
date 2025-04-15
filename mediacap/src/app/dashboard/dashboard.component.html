@@ -127,7 +127,7 @@
       <mat-card-header>
         <mat-card-title>
           Currently Reading 
-          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="showAddBookInput=true;">
+          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="showAddBookInputDiv()">
             <mat-icon>add</mat-icon>
           </button>
       </mat-card-title>
@@ -143,7 +143,7 @@
         
         @if (showAddBookInput) {
           <div class="current-entry-div add">
-            <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title">
+            <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title" #addBookInput>
             <mat-icon class="add-current-entry-icon" (click)="addBook()">check</mat-icon>
             <mat-icon class="add-current-entry-icon" (click)="showAddBookInput=false;">close</mat-icon>
           </div>

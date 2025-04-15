@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Firestore, addDoc, collection, collectionData, doc, docData } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
+import { ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Book } from '../models/book.class';
 import { Film } from '../models/film.class';
 import { Series } from '../models/series.class';
@@ -24,6 +25,7 @@ import { MatMenu, MatMenuModule } from '@angular/material/menu';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  @ViewChild('addBookInput') addBookInput!: ElementRef<HTMLInputElement>;
 
   userId: string | null = null;
   currentYear?: number;
@@ -223,7 +225,13 @@ export class DashboardComponent {
     
   }
 
- 
+ showAddBookInputDiv(){
+  this.showAddBookInput = true;
+  setTimeout(() => {
+    this.addBookInput?.nativeElement?.focus();
+  }, 50);
+ }
+
   openAddBookDialog(){
 
   }
