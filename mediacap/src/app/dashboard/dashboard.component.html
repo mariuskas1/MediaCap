@@ -123,11 +123,11 @@
 
 
   <div class="board-secondary">
-    <mat-card class="secondary-card current-books-card" (mouseleave)="toggleAddBookInput()">
+    <mat-card class="secondary-card current-books-card" (mouseleave)="showAddBookInput=false;">
       <mat-card-header>
         <mat-card-title>
           Currently Reading 
-          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="toggleAddBookInput()">
+          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="showAddBookInput=true;">
             <mat-icon>add</mat-icon>
           </button>
       </mat-card-title>
@@ -142,7 +142,7 @@
           <div class="current-entry-div add">
             <input type="text" class="current-input add-current-input" placeholder="Add book title">
             <mat-icon class="add-current-entry-icon">check</mat-icon>
-            <mat-icon class="add-current-entry-icon" (onclick)="hideAddBookInput()">close</mat-icon>
+            <mat-icon class="add-current-entry-icon" (click)="showAddBookInput=false;">close</mat-icon>
           </div>
         }
         

@@ -195,16 +195,7 @@ export class DashboardComponent {
   }
 
 
-  toggleAddBookInput(){
-    this.showAddBookInput = !this.showAddBookInput;
-  }
-
-  hideAddBookInput(){
-    setTimeout(() => {
-      
-    }, 50);
-  }
-
+ 
   openAddBookDialog(){
 
   }
