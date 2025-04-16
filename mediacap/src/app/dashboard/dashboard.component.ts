@@ -96,6 +96,7 @@ export class DashboardComponent {
   
     this.currentBooks$.subscribe((changes) => {
       this.currentBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
+      this.currentBooks.sort((a, b) => a.timestamp - b.timestamp);
     })
   }
 
@@ -215,6 +216,8 @@ export class DashboardComponent {
 
   async addBook(){
     if(this.newCurrentBook.title.length > 0){
+      this.newCurrentBook.timestamp = Date.now();
+
       try{
         const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
         await addDoc(currentBooksCollection, { ...this.newCurrentBook});
