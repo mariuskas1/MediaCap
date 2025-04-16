@@ -136,7 +136,7 @@
       <mat-card-content class="current-content">
         @for (book of currentBooks; track $index) {
           <div class="current-entry-div" (mouseleave)="hideOptions()">
-            <input type="text" class="current-input" value={{book.title}} disabled>
+            <input #bookInput type="text" class="current-input" [(ngModel)]="book.title" [disabled]="editCurrentBookIndex !== $index" (blur)="editCurrentBook(book, $index)">
             
             <!-- <button class="current-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
             <mat-menu #menu="matMenu">
@@ -148,7 +148,7 @@
 
             @if(selectedOptionsIndex === $index){
               <div class="current-entry-options-div" (mouseleave)="hideOptions()">
-                <div class="current-entry-option">Edit</div>
+                <div class="current-entry-option" (click)="setEditCurrentBookIndex($index)">Edit</div>
                 <div class="current-entry-option" (click)="deleteCurrentBook(book.id!)">Delete</div>
                 <div class="current-entry-option">Finished</div>
               </div>

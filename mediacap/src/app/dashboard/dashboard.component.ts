@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Firestore, addDoc, collection, collectionData, doc, docData, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
-import { ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { ViewChild, ElementRef, AfterViewChecked, ViewChildren, QueryList } from '@angular/core';
 import { Book } from '../models/book.class';
 import { Film } from '../models/film.class';
 import { Series } from '../models/series.class';
@@ -26,7 +26,10 @@ import { MatMenu, MatMenuModule } from '@angular/material/menu';
 })
 export class DashboardComponent {
   @ViewChild('addBookInput') addBookInput!: ElementRef<HTMLInputElement>;
+  @ViewChildren('bookInput') bookInputs!: QueryList<ElementRef<HTMLInputElement>>;
+
   selectedOptionsIndex: number | null = null;
+  editCurrentBookIndex: number | null = null;
 
   userId: string | null = null;
   currentYear?: number;
@@ -245,10 +248,27 @@ export class DashboardComponent {
 
   }
 
-  editCurrentBook(){
+  setEditCurrentBookIndex(index: number){
+    this.editCurrentBookIndex = index;
 
+    setTimeout(() => {
+      const input = this.bookInputs.toArray()[index];
+      input?.nativeElement.focus();
+    }, 50);
   }
 
+  async editCurrentBook(book: Book, index: number){
+    this.editCurrentBookIndex = null;
+
+    try {
+      const bookDocRef = doc(this.firestore, `books/${this.userId}/currentBooks/${book.id}`);
+      await updateDoc(bookDocRef, {
+        title: book.title,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async deleteCurrentBook(bookId: string){
     try {
