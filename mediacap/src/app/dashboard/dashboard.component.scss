@@ -54,8 +54,7 @@ mat-card-title{
 
 .secondary-card{
     position: relative;
-    width: 400px;
-    
+    width: 400px;    
     @include displayFlex($jc: flex-start);
 }
 
@@ -86,7 +85,7 @@ mat-card-content{
 }
 
 .current-content{
-    padding: none;
+    padding: 0;
     @include displayFlex();
     // border: 1px solid red;
 }
@@ -94,10 +93,10 @@ mat-card-content{
 .current-entry-div{
     @include displayFlex($fd:row, $jc: center);
     padding: 8px;
-    width: 100%;
-    min-width: 250px;
+    // width: 100%;
+    width: 280px;
     border-radius: 8px;
-    margin: 8px;
+    margin: 2px;
     position: relative;
 
     &:hover{
