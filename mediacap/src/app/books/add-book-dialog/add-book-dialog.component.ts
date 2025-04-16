@@ -44,10 +44,11 @@ export class AddBookDialogComponent {
 
 
     constructor(public dialogRef: MatDialogRef<AddBookDialogComponent>, 
-        @Inject(MAT_DIALOG_DATA) public data: { month: string; year: number; userId: string}){
+        @Inject(MAT_DIALOG_DATA) public data: { month: string; year: number; userId: string; title: string}){
           this.book.yearRead = data.year;
           this.book.monthRead = data.month;
           this.userId = data.userId;
+          this.book.title = data.title;
     }
 
   async addBook(){

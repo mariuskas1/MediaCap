@@ -15,6 +15,8 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { AddBookDialogComponent } from '../books/add-book-dialog/add-book-dialog.component';
 
 
 @Component({
@@ -61,7 +63,7 @@ export class DashboardComponent {
   showAddBookInput = false;
 
 
-  constructor(private route: ActivatedRoute, private firestore: Firestore){}
+  constructor(private route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog){}
   
   
   ngOnInit(){
@@ -244,8 +246,20 @@ export class DashboardComponent {
     this.newCurrentBook.title = '';
   }
 
-  openAddBookDialog(){
+  async setCurrentBookFinished(book: Book){
+    await this.deleteCurrentBook(book.id!);
+    this.openAddBookDialog(book);
+  }
 
+  openAddBookDialog(book: Book){
+    this.dialog.open(AddBookDialogComponent, {
+          data: {
+            month: this.currentMonth,
+            year: this.currentYear,
+            userId: this.userId,
+            title: book.title
+          }
+      });
   }
 
   setEditCurrentBookIndex(index: number){

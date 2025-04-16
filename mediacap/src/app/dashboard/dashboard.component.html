@@ -150,7 +150,7 @@
               <div class="current-entry-options-div" (mouseleave)="hideOptions()">
                 <div class="current-entry-option" (click)="setEditCurrentBookIndex($index)">Edit</div>
                 <div class="current-entry-option" (click)="deleteCurrentBook(book.id!)">Delete</div>
-                <div class="current-entry-option">Finished</div>
+                <div class="current-entry-option" (click)="setCurrentBookFinished(book)">Finished</div>
               </div>
             }
             
