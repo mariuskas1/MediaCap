@@ -33,7 +33,8 @@ export class DashboardComponent {
   @ViewChildren('bookInput') bookInputs!: QueryList<ElementRef<HTMLInputElement>>;
   @ViewChildren('seriesInput') seriesInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
-  selectedOptionsIndex: number | null = null;
+  selectedBookOptionsIndex: number | null = null;
+  selectedSeriesOptionsIndex: number | null = null;
   editCurrentBookIndex: number | null = null;
   editCurrentSeriesIndex: number | null = null;
 
@@ -371,7 +372,7 @@ export class DashboardComponent {
     try {
       const bookDocRef = doc(this.firestore, `books/${this.userId}/currentBooks/${bookId}`);
       await deleteDoc(bookDocRef);
-      this.selectedOptionsIndex = null;
+      this.selectedBookOptionsIndex = null;
     } catch (error) {
       console.error('Error deleting book:', error);
     }
@@ -381,22 +382,37 @@ export class DashboardComponent {
     try {
       const seriesDocRef = doc(this.firestore, `series/${this.userId}/currentSeries/${seriesId}`);
       await deleteDoc(seriesDocRef);
-      this.selectedOptionsIndex = null;
+      this.selectedSeriesOptionsIndex = null;
     } catch (error) {
       console.error('Error deleting series:', error);
     }
   }
 
 
-  showOptions(index:number){
-    if (this.selectedOptionsIndex === index) {
-      this.selectedOptionsIndex = null;
+
+
+  showBookOptions(index: number){
+    if (this.selectedBookOptionsIndex === index) {
+      this.selectedBookOptionsIndex = null;
     } else {
-      this.selectedOptionsIndex = index;
+      this.selectedBookOptionsIndex = index;
     }
   }
 
-  hideOptions(){
-    this.selectedOptionsIndex = null;
+  hideBookOptions(){
+    this.selectedBookOptionsIndex = null;
   }
+
+  showSeriesOptions(index: number){
+    if (this.selectedSeriesOptionsIndex === index) {
+      this.selectedSeriesOptionsIndex = null;
+    } else {
+      this.selectedSeriesOptionsIndex = index;
+    }
+  }
+
+  hideSeriesOptions(){
+    this.selectedSeriesOptionsIndex = null;
+  }
+
 }
