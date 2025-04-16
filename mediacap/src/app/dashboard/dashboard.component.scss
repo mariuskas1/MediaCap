@@ -76,7 +76,15 @@ mat-card-title{
    transition: all 125ms ease;
 }
 
+.add-series-btn{
+    left: 180px !important;
+}
+
 .current-books-card:hover .add-book-btn{
+    display: block;
+}
+
+.current-series-card:hover .add-series-btn{
     display: block;
 }
 
@@ -85,9 +93,8 @@ mat-card-content{
 }
 
 .current-content{
-    padding: 0;
+    padding-bottom: 8px;
     @include displayFlex();
-    // border: 1px solid red;
 }
 
 .current-entry-div{

@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBookDialogComponent } from '../books/add-book-dialog/add-book-dialog.component';
+import { AddSeriesDialogComponent } from '../series/add-series-dialog/add-series-dialog.component';
 
 
 @Component({
@@ -28,10 +29,13 @@ import { AddBookDialogComponent } from '../books/add-book-dialog/add-book-dialog
 })
 export class DashboardComponent {
   @ViewChild('addBookInput') addBookInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('addSeriesInput') addSeriesInput!: ElementRef<HTMLInputElement>;
   @ViewChildren('bookInput') bookInputs!: QueryList<ElementRef<HTMLInputElement>>;
+  @ViewChildren('seriesInput') seriesInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
   selectedOptionsIndex: number | null = null;
   editCurrentBookIndex: number | null = null;
+  editCurrentSeriesIndex: number | null = null;
 
   userId: string | null = null;
   currentYear?: number;
@@ -61,6 +65,11 @@ export class DashboardComponent {
   currentBooks: Book[] = [];
   newCurrentBook = new Book();
   showAddBookInput = false;
+  
+  currentSeries$!: Observable<Series[]>;
+  currentSeries: Series[] = [];
+  newCurrentSeries = new Series();
+  showAddSeriesInput = false;
 
 
   constructor(private route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog){}
@@ -231,8 +240,23 @@ export class DashboardComponent {
         console.error(err);
       }
     }
-    
   }
+
+  async addSeries(){
+    if(this.newCurrentSeries.title.length > 0){
+      this.newCurrentSeries.timestamp = Date.now();
+
+      try{
+        const currentSeriesCollection = collection(this.firestore, `series/${this.userId}/currentSeries`);
+        await addDoc(currentSeriesCollection, { ...this.newCurrentSeries});
+        this.newCurrentSeries = new Series();
+      } catch (err){
+        console.error(err);
+      }
+    }
+  }
+
+  
 
   showAddBookInputDiv(){
     this.showAddBookInput = true;
@@ -241,9 +265,21 @@ export class DashboardComponent {
     }, 50);
   }
 
+  showAddSeriesInputDiv(){
+    this.showAddSeriesInput = true;
+    setTimeout(() => {
+      this.addSeriesInput?.nativeElement?.focus();
+    }, 50);
+  }
+
   hideAddBookInputDiv(){
     this.showAddBookInput = false;
     this.newCurrentBook.title = '';
+  }
+
+  hideAddSeriesInputDiv(){
+    this.showAddSeriesInput = false;
+    this.newCurrentSeries.title = '';
   }
 
   async setCurrentBookFinished(book: Book){
@@ -251,15 +287,33 @@ export class DashboardComponent {
     this.openAddBookDialog(book);
   }
 
+  async setCurrentSeriesFinished(series: Series){
+    await this.deleteCurrentSeries(series.id!);
+    this.openAddSeriesDialog(series);
+  }
+
+
+
   openAddBookDialog(book: Book){
     this.dialog.open(AddBookDialogComponent, {
-          data: {
-            month: this.currentMonth,
-            year: this.currentYear,
-            userId: this.userId,
-            title: book.title
-          }
-      });
+        data: {
+          month: this.currentMonth,
+          year: this.currentYear,
+          userId: this.userId,
+          title: book.title
+        }
+    });
+  }
+
+  openAddSeriesDialog(series: Series){
+    this.dialog.open(AddSeriesDialogComponent, {
+      data: {
+        month: this.currentMonth,
+        year: this.currentYear,
+        userId: this.userId,
+        title: series.title
+      }
+  });
   }
 
   setEditCurrentBookIndex(index: number){
@@ -267,6 +321,15 @@ export class DashboardComponent {
 
     setTimeout(() => {
       const input = this.bookInputs.toArray()[index];
+      input?.nativeElement.focus();
+    }, 50);
+  }
+
+  setEditCurrentSeriesIndex(index: number){
+    this.editCurrentSeriesIndex = index;
+
+    setTimeout(() => {
+      const input = this.seriesInputs.toArray()[index];
       input?.nativeElement.focus();
     }, 50);
   }
@@ -284,6 +347,20 @@ export class DashboardComponent {
     }
   }
 
+  async editCurrentSeries(series: Series, index:number){
+    this.editCurrentSeriesIndex = null;
+
+    try {
+      const seriesDocRef = doc(this.firestore, `series/${this.userId}/currentSeries/${series.id}`);
+      await updateDoc(seriesDocRef, {
+        title: series.title,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
   async deleteCurrentBook(bookId: string){
     try {
       const bookDocRef = doc(this.firestore, `books/${this.userId}/currentBooks/${bookId}`);
@@ -291,6 +368,16 @@ export class DashboardComponent {
       this.selectedOptionsIndex = null;
     } catch (error) {
       console.error('Error deleting book:', error);
+    }
+  }
+
+  async deleteCurrentSeries(seriesId: string){
+    try {
+      const seriesDocRef = doc(this.firestore, `series/${this.userId}/currentSeries/${seriesId}`);
+      await deleteDoc(seriesDocRef);
+      this.selectedOptionsIndex = null;
+    } catch (error) {
+      console.error('Error deleting series:', error);
     }
   }
 

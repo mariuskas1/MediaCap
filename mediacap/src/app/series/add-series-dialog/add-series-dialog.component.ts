@@ -42,10 +42,11 @@ export class AddSeriesDialogComponent {
     ];
   
     constructor(public dialogRef: MatDialogRef<AddSeriesDialogComponent>, 
-      @Inject(MAT_DIALOG_DATA) public data: { month: string; year: number; userId: string}){
+      @Inject(MAT_DIALOG_DATA) public data: { month: string; year: number; userId: string; title: string}){
         this.series.yearWatched = data.year;
         this.series.monthWatched = data.month;
         this.userId = data.userId;
+        this.series.title = data.title;
       }
   
     async addSeries(){
