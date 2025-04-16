@@ -181,21 +181,26 @@
       </mat-card-header>
     
       <mat-card-content class="current-content">
-        @for (series of currentSeries; track $index) {
-          <div class="current-entry-div" (mouseleave)="hideOptions()">
-            <input #seriesInput type="text" class="current-input" [(ngModel)]="series.title" [disabled]="editCurrentSeriesIndex !== $index" (blur)="editCurrentSeries(series, $index)">
-            
-            <mat-icon class="current-option-btn" (click)="showOptions($index)">more_horiz</mat-icon>
-    
-            @if(selectedOptionsIndex === $index){
-              <div class="current-entry-options-div" (mouseleave)="hideOptions()">
-                <div class="current-entry-option" (click)="setEditCurrentSeriesIndex($index)">Edit</div>
-                <div class="current-entry-option" (click)="deleteCurrentSeries(series.id!)">Delete</div>
-                <div class="current-entry-option" (click)="setCurrentSeriesFinished(series)">Finished</div>
-              </div>
-            }
-          </div>
+        @if(currentSeries.length > 0) {
+          @for (series of currentSeries; track $index) {
+            <div class="current-entry-div" (mouseleave)="hideOptions()">
+              <input #seriesInput type="text" class="current-input" [(ngModel)]="series.title" [disabled]="editCurrentSeriesIndex !== $index" (blur)="editCurrentSeries(series, $index)">
+              
+              <mat-icon class="current-option-btn" (click)="showOptions($index)">more_horiz</mat-icon>
+      
+              @if(selectedOptionsIndex === $index){
+                <div class="current-entry-options-div" (mouseleave)="hideOptions()">
+                  <div class="current-entry-option" (click)="setEditCurrentSeriesIndex($index)">Edit</div>
+                  <div class="current-entry-option" (click)="deleteCurrentSeries(series.id!)">Delete</div>
+                  <div class="current-entry-option" (click)="setCurrentSeriesFinished(series)">Finished</div>
+                </div>
+              }
+            </div>
+          }
+        } @else {
+          -
         }
+        
     
         @if (showAddSeriesInput) {
           <div class="current-entry-div add">
@@ -206,6 +211,6 @@
         }
       </mat-card-content>
     </mat-card>
-    
+
   </div>
 </div>

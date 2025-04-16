@@ -115,7 +115,13 @@ export class DashboardComponent {
   }
 
   subscribeToCurrentSeriesCollection(){
-
+    const currentSeriesCollection = collection(this.firestore, `series/${this.userId}/currentSeries`);
+    this.currentSeries$ = collectionData(currentSeriesCollection, { idField: 'id' }) as Observable<Series[]>;
+  
+    this.currentSeries$.subscribe((changes) => {
+      this.currentSeries = Array.from(new Map(changes.map(series => [series.id, series])).values());
+      this.currentSeries.sort((a, b) => a.timestamp - b.timestamp);
+    })
   }
 
   subscribeToUserFilmsCollection(){
