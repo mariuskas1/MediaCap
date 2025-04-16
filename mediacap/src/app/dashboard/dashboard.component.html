@@ -137,6 +137,13 @@
         @for (book of currentBooks; track $index) {
           <div class="current-entry-div" (mouseleave)="hideOptions()">
             <input type="text" class="current-input" value={{book.title}} disabled>
+            
+            <!-- <button class="current-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                  <button mat-menu-item >Edit</button>
+                  <button mat-menu-item (click)="deleteCurrentBook(book.id!)">Delete</button>
+            </mat-menu> -->
+
             <mat-icon class="current-option-btn" (click)="showOptions($index)">more_horiz</mat-icon>
 
             @if(selectedOptionsIndex === $index){
