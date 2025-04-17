@@ -1,0 +1,45 @@
+@import './../../styles.scss';
+
+.board-container{
+    @include displayFlex($fd: row, $jc: flex-start, $ai: flex-start);
+    width: 100%;
+
+}
+
+.main-row{
+    @include displayFlex($fd: row);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.main-row.last{
+    margin-bottom: 40px;
+}
+
+mat-card{
+    width: 200px;
+    transition: all 125ms ease;
+    @include displayFlex();
+
+    &:hover{
+        scale: 1.02;
+    }
+}
+
+mat-card-title{
+    @include displayFlex($fd:row);
+    position: relative;
+}
+
+.card-number{
+    margin-left: 8px;
+    
+}
+
+.normal-card{
+    height: 150px;
+}
+
+.large-card{
+    width: 100%;
+}

@@ -1,1 +1,66 @@
-<p>films works!</p>
+<div class="board-container">
+    <div class="board-main">
+  
+        <h1>Films</h1>
+
+        <div class="main-row">
+          <mat-card class="normal-card">
+            <mat-card-header>
+              <mat-card-title><mat-icon>theaters</mat-icon> <span class="card-number">{{filmsWatchedYear}}</span> </mat-card-title>
+            </mat-card-header>
+          
+            <mat-card-content>
+              <p>Films watched this year</p>
+            </mat-card-content>
+          
+          </mat-card>
+    
+          <mat-card class="normal-card">
+            <mat-card-header>
+              <mat-card-title><mat-icon>star_outline</mat-icon> <span class="card-number">{{filmHighlights}}</span> </mat-card-title>
+            </mat-card-header>
+          
+            <mat-card-content>
+              <p>Highlights</p>
+            </mat-card-content>
+          
+          </mat-card>
+    
+          <mat-card class="normal-card">
+            <mat-card-header>
+              @if (favoriteFilmGenres.length > 0) {
+                <div class="genre-div">
+                  @for (genre of favoriteFilmGenres; track $index) {
+                    <span class="genre-span">{{genre}}</span>
+                  }
+                </div>
+                
+              } @else {
+                <span class="genre-span">-</span>
+              }
+              
+            </mat-card-header>
+          
+            <mat-card-content>
+              <p>Favorite Genres</p>
+            </mat-card-content>
+          
+          </mat-card>
+        </div>
+    
+        <div class="main-row">
+          <mat-card class="large-card">
+            <mat-card-header>
+              <mat-card-title>Upcoming</mat-card-title>
+            </mat-card-header>
+          
+            <mat-card-content>
+              <p>List</p>
+            </mat-card-content>
+          
+          </mat-card>
+        </div>
+    
+</div>
+
+
