@@ -94,11 +94,14 @@ export class FilmsComponent {
     const genreCounts = Object.entries(this.filmGenresMap).map(
       ([genre, films]) => ({ genre, count: films.length })
     );
+
+    console.log(genreCounts);
   
-    genreCounts.sort((a, b) => b.count - a.count);
-    const hasMultiple = genreCounts.some(entry => entry.count > 1);
-    if (hasMultiple) {
-      const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
+    const filteredCounts = genreCounts.filter(entry => entry.count > 1);
+    filteredCounts.sort((a, b) => b.count - a.count);
+
+    if (filteredCounts.length > 0) {
+      const topGenres = filteredCounts.slice(0, 2).map(entry => entry.genre);
       this.favoriteFilmGenres = topGenres;
     } else {
       this.favoriteFilmGenres = ['-'];

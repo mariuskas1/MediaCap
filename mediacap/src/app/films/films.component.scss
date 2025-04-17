@@ -75,3 +75,14 @@ mat-card-title{
         scale: 1.1;
     }
 }
+
+.genre-span{
+    font-weight: 500;
+    font-size: 16px;
+    display: block;
+}
+
+.genre-div{
+    @include displayFlex($fd: column);
+    margin-bottom: 8px;
+}

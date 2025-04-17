@@ -118,11 +118,12 @@ export class BooksComponent {
     const genreCounts = Object.entries(this.bookGenresMap).map(
       ([genre, books]) => ({ genre, count: books.length })
     );
+  
+    const filteredCounts = genreCounts.filter(entry => entry.count > 1);
+    filteredCounts.sort((a, b) => b.count - a.count);
 
-    genreCounts.sort((a, b) => b.count - a.count);
-    const hasMultiple = genreCounts.some(entry => entry.count > 1);
-    if (hasMultiple) {
-      const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
+    if (filteredCounts.length > 0) {
+      const topGenres = filteredCounts.slice(0, 2).map(entry => entry.genre);
       this.favoriteBookGenres = topGenres;
     } else {
       this.favoriteBookGenres = ['-'];
