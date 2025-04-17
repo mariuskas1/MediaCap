@@ -121,7 +121,7 @@ export class BooksComponent {
   
     const filteredCounts = genreCounts.filter(entry => entry.count > 1);
     filteredCounts.sort((a, b) => b.count - a.count);
-
+    
     if (filteredCounts.length > 0) {
       const topGenres = filteredCounts.slice(0, 2).map(entry => entry.genre);
       this.favoriteBookGenres = topGenres;

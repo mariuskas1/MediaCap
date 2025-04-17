@@ -42,7 +42,11 @@
             </mat-card-header>
           
             <mat-card-content>
-              <p>Favorite Genres</p>
+                @if(favoriteFilmGenres.length > 1){
+                    <p>Favorite Genres</p>
+                } @else {
+                    <p>Favorite Genre</p>
+                }
             </mat-card-content>
           
           </mat-card>
