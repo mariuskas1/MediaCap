@@ -1,1 +1,109 @@
-<p>books works!</p>
+<div class="board-container">
+    <div class="board-main">
+  
+      <h1>Books</h1>
+  
+      <div class="main-row">
+        <mat-card class="normal-card">
+          <mat-card-header>
+            <mat-card-title><mat-icon>menu_book</mat-icon> <span class="card-number">{{booksReadYear}}</span> </mat-card-title>
+          </mat-card-header>
+        
+          <mat-card-content>
+            <p>Books read this year</p>
+          </mat-card-content>
+        
+        </mat-card>
+  
+        <mat-card class="normal-card">
+          <mat-card-header>
+            <mat-card-title><mat-icon>star_outline</mat-icon> <span class="card-number">{{bookHighlights}}</span></mat-card-title>
+          </mat-card-header>
+        
+          <mat-card-content>
+            <p>Highlights</p>
+          </mat-card-content>
+        
+        </mat-card>
+  
+        <mat-card class="normal-card">
+          <mat-card-header>
+            @if (favoriteBookGenres.length > 0) {
+              <div class="genre-div">
+                @for (genre of favoriteBookGenres; track $index) {
+                  <span class="genre-span">{{genre}}</span>
+                }
+              </div>
+            } @else {
+              <span class="genre-span">-</span>
+            }
+          </mat-card-header>
+        
+          <mat-card-content>
+            <p>Favorite Genres</p>
+          </mat-card-content>
+        
+        </mat-card>
+      </div>
+  
+      <div class="main-row last">
+        <mat-card class="large-card">
+          <mat-card-header>
+            <mat-card-title>Upcoming</mat-card-title>
+          </mat-card-header>
+        
+          <mat-card-content>
+            <p>List</p>
+          </mat-card-content>
+        
+        </mat-card>
+      </div>
+</div>
+
+<div class="board-secondary">
+    <mat-card class="secondary-card current-books-card" (mouseleave)="hideAddBookInputDiv()">
+      <mat-card-header>
+        <mat-card-title>
+          Currently Reading 
+          <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="showAddBookInputDiv()">
+            <mat-icon>add</mat-icon>
+          </button>
+      </mat-card-title>
+      </mat-card-header>
+    
+      <mat-card-content class="current-content">
+        @for (book of currentBooks; track $index) {
+          <div class="current-entry-div" (mouseleave)="hideBookOptions()">
+            <input #bookInput type="text" class="current-input" [(ngModel)]="book.title" [disabled]="editCurrentBookIndex !== $index" (blur)="editCurrentBook(book, $index)">
+            
+            <!-- <button class="current-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                  <button mat-menu-item >Edit</button>
+                  <button mat-menu-item (click)="deleteCurrentBook(book.id!)">Delete</button>
+            </mat-menu> -->
+
+            <mat-icon class="current-option-btn" (click)="showBookOptions($index)">more_horiz</mat-icon>
+
+            @if(selectedBookOptionsIndex === $index){
+              <div class="current-entry-options-div" (mouseleave)="hideBookOptions()">
+                <div class="current-entry-option" (click)="setEditCurrentBookIndex($index)">Edit</div>
+                <div class="current-entry-option" (click)="deleteCurrentBook(book.id!)">Delete</div>
+                <div class="current-entry-option" (click)="setCurrentBookFinished(book)">Finished</div>
+              </div>
+            }
+            
+          </div>
+        }
+        
+        @if (showAddBookInput) {
+          <div class="current-entry-div add">
+            <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title" #addBookInput (keydown.enter)="addBook()">
+            <mat-icon class="add-current-entry-icon" (click)="addBook()">check</mat-icon>
+            <mat-icon class="add-current-entry-icon" (click)="hideAddBookInputDiv()">close</mat-icon>
+          </div>
+        }
+        
+
+      </mat-card-content>
+    
+    </mat-card>

@@ -1,0 +1,81 @@
+@import './../../styles.scss';
+
+.board-container{
+    @include displayFlex($fd: row, $jc: flex-start, $ai: flex-start);
+    width: 100%;
+
+}
+
+.main-row{
+    @include displayFlex($fd: row);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.main-row.last{
+    margin-bottom: 40px;
+}
+
+mat-card{
+    width: 200px;
+    transition: all 125ms ease;
+    @include displayFlex();
+
+    &:hover{
+        scale: 1.02;
+    }
+}
+
+mat-card-title{
+    @include displayFlex($fd:row);
+    position: relative;
+}
+
+.card-number{
+    margin-left: 8px;
+    
+}
+
+.normal-card{
+    height: 150px;
+}
+
+.large-card{
+    width: 100%;
+}
+
+.board-secondary{
+    width: 400px;
+    @include displayFlex($fd: column, $ai: flex-start);
+    gap: 24px;
+    margin-left: 150px;
+    margin-top: 50px ;
+}
+
+.secondary-card{
+    position: relative;
+    width: 400px;    
+    @include displayFlex($jc: flex-start);
+}
+
+.genre-span{
+    font-weight: 500;
+    font-size: 16px;
+    display: block;
+}
+
+.genre-div{
+    @include displayFlex($fd: column);
+    margin-bottom: 8px;
+}
+
+.add-btn{
+   position: absolute;
+   left: 170px;
+   display: none;
+   transition: all 125ms ease;
+}
+
+.current-books-card:hover .add-book-btn{
+    display: block;
+}
