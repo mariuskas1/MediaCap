@@ -4,7 +4,7 @@
     <h1>Books</h1>
 
     <div class="main-row">
-      <mat-card class="normal-card">
+      <mat-card class="normal-card link-card" [routerLink]="['/main', userId, 'books', 'list']">
         <mat-card-header>
           <mat-card-title><mat-icon>menu_book</mat-icon> <span class="card-number">{{booksReadYear}}</span> </mat-card-title>
         </mat-card-header>
@@ -15,7 +15,7 @@
       
       </mat-card>
 
-      <mat-card class="normal-card">
+      <mat-card class="normal-card link-card" [routerLink]="['/main', userId, 'books', 'favorites']">
         <mat-card-header>
           <mat-card-title><mat-icon>star_outline</mat-icon> <span class="card-number">{{bookHighlights}}</span></mat-card-title>
         </mat-card-header>
@@ -26,7 +26,7 @@
       
       </mat-card>
 
-      <mat-card class="normal-card">
+      <mat-card class="normal-card link-card">
         <mat-card-header>
           @if (favoriteBookGenres.length > 0) {
             <div class="genre-div">
@@ -62,7 +62,7 @@
     <h1>Films</h1>
 
     <div class="main-row">
-      <mat-card class="normal-card">
+      <mat-card class="normal-card link-card" [routerLink]="['/main', userId, 'films', 'list']">
         <mat-card-header>
           <mat-card-title><mat-icon>theaters</mat-icon> <span class="card-number">{{filmsWatchedYear}}</span> </mat-card-title>
         </mat-card-header>
@@ -73,7 +73,7 @@
       
       </mat-card>
 
-      <mat-card class="normal-card">
+      <mat-card class="normal-card link-card" [routerLink]="['/main', userId, 'films', 'favorites']">
         <mat-card-header>
           <mat-card-title><mat-icon>star_outline</mat-icon> <span class="card-number">{{filmHighlights}}</span> </mat-card-title>
         </mat-card-header>
@@ -84,7 +84,7 @@
       
       </mat-card>
 
-      <mat-card class="normal-card">
+      <mat-card class="normal-card link-card">
         <mat-card-header>
           @if (favoriteFilmGenres.length > 0) {
             <div class="genre-div">

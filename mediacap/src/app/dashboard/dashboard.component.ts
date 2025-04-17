@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Firestore, addDoc, collection, collectionData, doc, docData, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ import { AddSeriesDialogComponent } from '../series/add-series-dialog/add-series
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ MatCardModule, MatIcon, MatButtonModule, MatTooltipModule, MatListModule, FormsModule, MatInputModule, MatMenuModule],
+  imports: [ MatCardModule, MatIcon, MatButtonModule, MatTooltipModule, MatListModule, FormsModule, MatInputModule, MatMenuModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
