@@ -8,9 +8,10 @@ import { Film } from '../models/film.class';
 import { Series } from '../models/series.class';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { collection, collectionData, doc, Firestore, updateDoc, deleteDoc, addDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { AddBookDialogComponent } from './add-book-dialog/add-book-dialog.component';
 
 
 @Component({
@@ -128,17 +129,89 @@ export class BooksComponent {
     }, 50);
   }
 
-  
-
   hideAddBookInputDiv(){
     this.showAddBookInput = false;
     this.newCurrentBook.title = '';
+  }
+
+  showBookOptions(index: number){
+    if (this.selectedBookOptionsIndex === index) {
+      this.selectedBookOptionsIndex = null;
+    } else {
+      this.selectedBookOptionsIndex = index;
+    }
+  }
+
+  hideBookOptions(){
+    this.selectedBookOptionsIndex = null;
+  }
+
+
+  async editCurrentBook(book: Book, index: number){
+    this.editCurrentBookIndex = null;
+
+    try {
+      const bookDocRef = doc(this.firestore, `books/${this.userId}/currentBooks/${book.id}`);
+      await updateDoc(bookDocRef, {
+        title: book.title,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setEditCurrentBookIndex(index: number){
+    this.editCurrentBookIndex = index;
+
+    setTimeout(() => {
+      const input = this.bookInputs.toArray()[index];
+      input?.nativeElement.focus();
+    }, 50);
+  }
+
+  async deleteCurrentBook(bookId: string){
+      try {
+        const bookDocRef = doc(this.firestore, `books/${this.userId}/currentBooks/${bookId}`);
+        await deleteDoc(bookDocRef);
+        this.selectedBookOptionsIndex = null;
+      } catch (error) {
+        console.error('Error deleting book:', error);
+      }
+  }
+
+  async setCurrentBookFinished(book: Book){
+    await this.deleteCurrentBook(book.id!);
+    this.openAddBookDialog(book);
+  }
+
+  openAddBookDialog(book: Book){
+    this.dialog.open(AddBookDialogComponent, {
+        data: {
+          month: this.currentMonth,
+          year: this.currentYear,
+          userId: this.userId,
+          title: book.title
+        }
+    });
+  }
+
+    async addBook(){
+    if(this.newCurrentBook.title.length > 0){
+      this.newCurrentBook.timestamp = Date.now();
+
+      try{
+        const currentBooksCollection = collection(this.firestore, `books/${this.userId}/currentBooks`);
+        await addDoc(currentBooksCollection, { ...this.newCurrentBook});
+        this.newCurrentBook = new Book();
+      } catch (err){
+        console.error(err);
+      }
+    }
   }
 
   setCurrentDate(){
     const currentDate = new Date(); 
     this.currentYear = currentDate.getFullYear(); 
     this.currentMonth = currentDate.toLocaleString('default', { month: 'long' });
-
   }
 }

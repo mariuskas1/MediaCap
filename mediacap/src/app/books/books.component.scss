@@ -79,3 +79,123 @@ mat-card-title{
 .current-books-card:hover .add-book-btn{
     display: block;
 }
+
+
+mat-card-content{
+    @include displayFlex($ai: center);
+}
+
+.current-content{
+    padding-bottom: 8px;
+    @include displayFlex();
+}
+
+.current-entry-div{
+    @include displayFlex($fd:row, $jc: center);
+    padding: 8px;
+    // width: 100%;
+    width: 280px;
+    border-radius: 8px;
+    margin: 2px;
+    position: relative;
+
+    &:hover{
+        background-color: rgb(240, 240, 240);
+    }
+
+    &:hover .current-input{
+        background-color: rgb(240, 240, 240);
+    }
+
+    &:hover .current-option-btn{
+        display: block;
+    }
+}
+
+.current-option-btn{
+    width: 20px;
+    margin-left: 24px;
+    margin-right: 8px;
+    transition: all;
+    position: absolute;
+    right: 8px;
+    display: none;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.current-input{
+    border: none;
+    background-color: white;
+    width: 160px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.add-current-input:focus{
+    border: 1px solid gray;
+    outline: none;
+}
+
+.current-input.add-current-input{
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    padding: 4px;
+    margin-right: 12px;
+    text-align: left;
+}
+
+.current-entry-div.add{
+    // position: absolute;
+    // bottom: 16px;
+    width: 100%;
+    @include displayFlex($fd:row, $ai: center);
+}
+
+.add-current-entry-icon{
+    font-size: 20px;
+    // transition: all 125ms ease;
+
+    &:hover{
+        cursor: pointer;
+        scale: 1.02;
+    }
+}
+
+
+@media(max-width: 1600px){
+    .board-secondary{
+        margin-left: 100px;
+    }
+}
+@media(max-width: 1500px){
+    .board-secondary{
+        margin-left: 50px;
+    }
+    .secondary-card{
+        width: 350px;
+    }
+}
+
+.current-entry-options-div{
+    position: absolute;
+    right: -80px;
+    bottom: 1px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 8px 0;
+    z-index: 2000;
+}
+
+.current-entry-option{
+    width: 100%;
+    padding: 4px 16px;
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(240, 240, 240);
+    }
+}
