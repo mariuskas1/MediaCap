@@ -37,9 +37,10 @@ export class AddBookDialogComponent {
     firestore: Firestore = inject(Firestore);
   
     bookGenres: string[] = [
-      'Action', 'Adventure', 'Autobiography', 'Biography', 'Classic', 'Comedy', 'Crime', 'Documentary', 'Dystopian',
-      'Drama', 'Family', 'Fantasy', 'History', 'Indie', 'Horror', 'Literary', 'Mystery', 'Modern Classic', 
-      'Romance', 'Sci-Fi', 'Sport', 'Spy', 'Short Stories', 'Thriller', 'War',  'Western'
+      'Adventure', 'Autobiography', 'Biography', 'Classic', 'Comedy', 'Crime',
+      'Drama', 'Dystopian','Fantasy', 'Graphic Novel', 'History', 'Horror', 'Indie',
+      'Literary', 'Memoir', 'Modern Classic', 'Mystery', 'Non-fiction', 'Poetry', 'Romance',
+      'Sci-Fi', 'Short Stories', 'Sport', 'Spy', 'Suspense', 'Thriller', 'War', 'Western'
     ];
 
 
