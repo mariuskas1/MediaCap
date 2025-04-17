@@ -79,7 +79,7 @@ export class DashboardComponent {
   ngOnInit(){
     this.getUserId();
     this.getBoardData();
-    this.setCurrentYear();
+    this.setCurrentDate();
   }
 
   getUserId(){
@@ -228,7 +228,7 @@ export class DashboardComponent {
   }
 
 
-  setCurrentYear(){
+  setCurrentDate(){
     const currentDate = new Date(); 
     this.currentYear = currentDate.getFullYear(); 
     this.currentMonth = currentDate.toLocaleString('default', { month: 'long' });

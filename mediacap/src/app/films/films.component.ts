@@ -8,6 +8,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Film } from '../models/film.class';
 import { Observable } from 'rxjs';
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-films',
@@ -23,6 +26,7 @@ export class FilmsComponent {
   currentMonth?: string;
 
   filmsWatchedYear?: number; 
+  filmsWatchedMonth?: number; 
   filmHighlights?: number;
   filmGenresMap: { [genre: string]: Film[] } = {};
   favoriteFilmGenres: string[] = [];
@@ -30,4 +34,76 @@ export class FilmsComponent {
   films$!: Observable<Film[]>;
   allUserFilms: Film[] = [];
 
+  constructor(private route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog){}
+
+
+  ngOnInit(){
+    this.getUserId();
+    this.getBoardData();
+    this.setCurrentDate();
+  }
+
+  getUserId(){
+    this.route.parent?.paramMap.subscribe(params => {
+      this.userId = params.get('id'); 
+    });
+  }
+
+  getBoardData(){
+    this.subscribeToUserFilmsCollection();
+ 
+  }
+
+  subscribeToUserFilmsCollection(){
+    const userFilmsCollection = collection(this.firestore, `films/${this.userId}/userFilms`);
+    this.films$ = collectionData(userFilmsCollection, { idField: 'id' }) as Observable<Film[]>;
+  
+    this.films$.subscribe((changes) => {
+      this.getFilmStats(changes);
+    })
+  }
+
+  getFilmStats(changes: Film[]){
+    this.allUserFilms = Array.from(new Map(changes.map(film => [film.id, film])).values());
+    const filmsWatchedThisMonthArray = this.allUserFilms.filter((film) => film.yearWatched === this.currentYear && film.monthWatched === this.currentMonth);
+    this.filmsWatchedMonth = filmsWatchedThisMonthArray.length;
+    const filmHighlightsArray = filmsWatchedThisMonthArray.filter((film) => film.favorite === true);
+    this.filmHighlights = filmHighlightsArray.length;
+
+    this.sortFilmsAfterGenres(filmsWatchedThisMonthArray);
+  }
+
+  sortFilmsAfterGenres(filmsWatchedThisYearArray: Film[]) {
+    this.filmGenresMap = {};
+  
+    filmsWatchedThisYearArray.forEach(film => {
+      if (Array.isArray(film.genres)) {
+        film.genres.forEach(genre => {
+          if (!this.filmGenresMap[genre]) {
+            this.filmGenresMap[genre] = [];
+          }
+          this.filmGenresMap[genre].push(film);
+        });
+      }
+    });
+  
+    this.determineFavoriteFilmGenres();
+  }
+
+  determineFavoriteFilmGenres() {
+    const genreCounts = Object.entries(this.filmGenresMap).map(
+      ([genre, films]) => ({ genre, count: films.length })
+    );
+  
+    genreCounts.sort((a, b) => b.count - a.count);
+    const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
+    this.favoriteFilmGenres = topGenres;
+  
+  }
+
+  setCurrentDate(){
+    const currentDate = new Date(); 
+    this.currentYear = currentDate.getFullYear(); 
+    this.currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+  }
 }
