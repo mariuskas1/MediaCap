@@ -96,9 +96,13 @@ export class FilmsComponent {
     );
   
     genreCounts.sort((a, b) => b.count - a.count);
-    const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
-    this.favoriteFilmGenres = topGenres;
-  
+    const hasMultiple = genreCounts.some(entry => entry.count > 1);
+    if (hasMultiple) {
+      const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
+      this.favoriteFilmGenres = topGenres;
+    } else {
+      this.favoriteFilmGenres = ['-'];
+    }
   }
 
   setCurrentDate(){

@@ -120,8 +120,13 @@ export class BooksComponent {
     );
 
     genreCounts.sort((a, b) => b.count - a.count);
-    const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
-    this.favoriteBookGenres = topGenres;
+    const hasMultiple = genreCounts.some(entry => entry.count > 1);
+    if (hasMultiple) {
+      const topGenres = genreCounts.slice(0, 2).map(entry => entry.genre);
+      this.favoriteBookGenres = topGenres;
+    } else {
+      this.favoriteBookGenres = ['-'];
+    }
   }
 
   showAddBookInputDiv(){
