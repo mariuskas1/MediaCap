@@ -6,11 +6,11 @@
       <div class="main-row">
         <mat-card class="normal-card">
           <mat-card-header>
-            <mat-card-title><mat-icon>menu_book</mat-icon> <span class="card-number">{{booksReadYear}}</span> </mat-card-title>
+            <mat-card-title><mat-icon>menu_book</mat-icon> <span class="card-number">{{booksReadMonth}}</span> </mat-card-title>
           </mat-card-header>
         
           <mat-card-content>
-            <p>Books read this year</p>
+            <p>Books read this month</p>
           </mat-card-content>
         
         </mat-card>
@@ -61,6 +61,13 @@
 </div>
 
 <div class="board-secondary">
+    <mat-card class="secondary-card link" [routerLink]="['/main', userId, 'books', 'list']">
+        <mat-card-header>
+            <mat-card-title>See all<mat-icon class="arrow-icon">arrow_outward</mat-icon>
+          </mat-card-title>
+        </mat-card-header>
+    </mat-card>
+
     <mat-card class="secondary-card current-books-card" (mouseleave)="hideAddBookInputDiv()">
       <mat-card-header>
         <mat-card-title>

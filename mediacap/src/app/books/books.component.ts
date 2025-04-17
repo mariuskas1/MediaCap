@@ -10,14 +10,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { collection, collectionData, doc, Firestore, updateDoc, deleteDoc, addDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { AddBookDialogComponent } from './add-book-dialog/add-book-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [ MatCardModule, MatIcon, MatButtonModule,  MatTooltipModule, FormsModule],
+  imports: [ MatCardModule, MatIcon, MatButtonModule,  MatTooltipModule, FormsModule, MatMenuModule, RouterModule],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss'
 })
@@ -29,6 +30,7 @@ export class BooksComponent {
   editCurrentBookIndex: number | null = null;
 
   booksReadYear?: number; 
+  booksReadMonth?: number; 
   bookHighlights?: number;
   bookGenresMap: { [genre: string]: Book[] } = {};
   favoriteBookGenres: string[] = [];
@@ -87,12 +89,12 @@ export class BooksComponent {
 
   getBookStats(changes: Book[]){
     this.allUserBooks = Array.from(new Map(changes.map(book => [book.id, book])).values());
-    const booksReadThisYearArray = this.allUserBooks.filter((book) => book.yearRead === this.currentYear);
-    this.booksReadYear = booksReadThisYearArray.length;
-    const bookHighlightsArray = booksReadThisYearArray.filter((book) => book.favorite === true);
+    const booksReadThisMonthArray = this.allUserBooks.filter((book) => book.yearRead === this.currentYear && book.monthRead === this.currentMonth);
+    this.booksReadMonth = booksReadThisMonthArray.length;
+    const bookHighlightsArray = booksReadThisMonthArray.filter((book) => book.favorite === true);
     this.bookHighlights = bookHighlightsArray.length;
 
-    this.sortBooksAfterGenres(booksReadThisYearArray);
+    this.sortBooksAfterGenres(booksReadThisMonthArray);
   }
 
   sortBooksAfterGenres(booksReadThisYearArray: Book[]){

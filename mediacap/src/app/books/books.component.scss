@@ -199,3 +199,21 @@ mat-card-content{
         background-color: rgb(240, 240, 240);
     }
 }
+
+.arrow-icon{
+    font-weight: 600;
+    margin-left: 8px;
+    transition: all 100ms ease;
+}
+
+.link{
+    padding-bottom: 16px;
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    &:hover .arrow-icon{
+        scale: 1.1;
+    }
+}

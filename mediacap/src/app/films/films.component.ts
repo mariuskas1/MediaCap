@@ -10,12 +10,12 @@ import { Film } from '../models/film.class';
 import { Observable } from 'rxjs';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-films',
   standalone: true,
-  imports: [MatCardModule, MatIcon, MatButtonModule, MatTooltipModule, MatListModule, FormsModule, MatInputModule,],
+  imports: [MatCardModule, MatIcon, MatButtonModule, MatTooltipModule, MatListModule, FormsModule, MatInputModule, RouterModule],
   templateUrl: './films.component.html',
   styleUrl: './films.component.scss'
 })
