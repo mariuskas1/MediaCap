@@ -1,0 +1,144 @@
+
+mat-card{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.settings-card{
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    margin-bottom: 16px;
+}
+
+
+  
+  label {
+    margin-bottom: 4px; 
+    font-size: 14px;
+    color: #555; 
+    margin-right: 8px;
+  }
+  
+  .selector {
+    width: 100px; 
+    height: 32px; 
+    padding: 4px; 
+    font-size: 14px; 
+    color: #333; 
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    background-color: #fff; 
+    appearance: none; 
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns%3D%27http%3A//www.w3.org/2000/svg%27 width%3D%2710%27 height%3D%2710%27 viewBox%3D%270 0 10 10%27%3E%3Cpath d%3D%27M0 0l5 5 5-5H0z%27 fill%3D%27%23555%27/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px;
+  }
+  
+  .selector:focus {
+    border-color: #007bff; 
+    outline: none; 
+  }
+
+ 
+  .search-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    background-color: #fff; 
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    max-width: 300px; 
+    box-sizing: border-box;
+    height: 32px;
+    width: 40%;
+  }
+  
+  .search-bar {
+    flex: 1; 
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fff;
+    height: 95%;
+  }
+  
+  
+  
+
+.user-table{
+    width: 100%;
+    border-collapse: collapse;
+    
+    tr{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4); 
+        &:last-child{
+            border-bottom: 0;
+        }
+        &:first-child{
+            cursor: unset;
+            &:hover{
+                background-color: unset;
+            }
+        }
+         cursor: default;
+        // &:hover{
+        //     background-color: rgba(0, 0, 0, 0.05);
+        // }
+    }
+
+    th, td {
+        text-align: center ; 
+        vertical-align: middle ; 
+      }
+
+    th{
+        text-align: center !important; 
+        vertical-align: middle !important; 
+    }
+   
+    td{
+        height: 48px;
+        padding: none;
+        
+    }
+
+    td:last-child, th:last-child {
+        width: 24px;
+      }
+    // td:first-child, th:first-child {
+    //     width: 350px; 
+    //   }
+
+    th{
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 14px;
+        font-weight: 500;
+        text-align: start;
+    }
+}
+
+mat-icon{
+    z-index: 100;
+
+    &:hover{
+        cursor: pointer;
+        scale: 1.1;
+        transition: all 125ms ease;
+    }
+}
+
+.gold-star{
+    color: gold;
+}
+
+
+ 
