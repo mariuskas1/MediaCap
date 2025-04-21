@@ -4,6 +4,7 @@ mat-card{
     width: 400px;
     height: 400px;
     align-items: center;
+    padding: 16px;
 }
 
 form{
@@ -22,7 +23,7 @@ form{
 
 mat-card-actions{
     width: 100%;
-    @include displayFlex();
+    @include displayFlex($fd: row);
 }
 
 .login-msg{
