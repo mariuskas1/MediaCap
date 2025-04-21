@@ -10,5 +10,12 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   styleUrl: './login-layout.component.scss'
 })
 export class LoginLayoutComponent {
+  showLogo = true;
+
+  ngOnInit(){
+    setTimeout(() => {
+      this.showLogo = false;
+    }, 1000)
+  }
 
 }

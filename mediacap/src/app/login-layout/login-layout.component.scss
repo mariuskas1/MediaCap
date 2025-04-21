@@ -11,3 +11,13 @@ mat-toolbar{
     position: fixed;
     top:  0;
 }
+
+.logo-div{
+    @include displayFlex();
+}
+
+.logo-text{
+    font-size: 24px;
+    font-weight: 700;
+    color: rgb(28,74,186);
+}

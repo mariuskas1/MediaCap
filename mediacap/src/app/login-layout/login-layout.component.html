@@ -1,8 +1,17 @@
 <div class="log-in-container">
-    <mat-toolbar color="primary">
-        <span>Mediacap</span>        
-    </mat-toolbar>
-      
+    @if(showLogo){
+        <div class="logo-div">
+            <img src="./../../assets/img/simplelogo2.png" alt="">
+            <span class="logo-text">MediaCap</span>
+        </div>
+        
+    } @else {
+        <mat-toolbar color="primary">
+            <span>MediaCap</span>        
+        </mat-toolbar>
+          
+        <router-outlet></router-outlet>
+    }
 
-    <router-outlet></router-outlet>
+    
 </div>
