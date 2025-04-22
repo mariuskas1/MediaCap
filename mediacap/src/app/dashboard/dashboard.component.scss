@@ -3,12 +3,16 @@
 .board-container{
     @include displayFlex($fd: row, $jc: flex-start, $ai: flex-start);
     width: 100%;
+    
+    
 }
 
 .board-main{
     width: 100%;
     max-width: 600px;
     padding-bottom: 24px;
+    height: 100%;
+    
 }
 
 .main-row{

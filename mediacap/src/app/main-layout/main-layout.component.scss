@@ -2,7 +2,13 @@
 
 .mat-drawer-container{
     height: 100vh;
-  }
+}
+
+
+:host ::ng-deep .mat-drawer-content {
+  overflow: hidden !important;
+}
+
 
   .menu-icon{
     margin-right: 16px;
@@ -70,6 +76,8 @@
     padding-left: 56px;
     padding-right: 56px;
     padding-top: 32px;
+    height: calc(100dvh - 64px);
+    overflow-y: auto;
   }
   
   
@@ -111,9 +119,6 @@
   }
 }
 
-.menu-icon-mobile{
-  
-}
 
 @media(max-width: 1000px){
     .sidenav, .menu-icon{
