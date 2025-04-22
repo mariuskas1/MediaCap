@@ -1,5 +1,93 @@
 <div class="board-container">
+
   <div class="board-main">
+
+    <div class="board-secondary-mobile">
+      <mat-card class="secondary-mobile-card current-books-card" (mouseleave)="hideAddBookInputDiv()">
+        <mat-card-header>
+          <mat-card-title>
+            Currently Reading 
+            <button mat-icon-button color="primary" class="add-btn add-book-btn" matTooltip="Add book" [matTooltipPosition]="'above'" (click)="showAddBookInputDiv()">
+              <mat-icon>add</mat-icon>
+            </button>
+        </mat-card-title>
+        </mat-card-header>
+      
+        <mat-card-content class="current-content">
+          @for (book of currentBooks; track $index) {
+            <div class="current-entry-div" (mouseleave)="hideBookOptions()">
+              <input #bookInput type="text" class="current-input" [(ngModel)]="book.title" [disabled]="editCurrentBookIndex !== $index" (blur)="editCurrentBook(book, $index)">
+  
+              <mat-icon class="current-option-btn" (click)="showBookOptions($index)">more_horiz</mat-icon>
+  
+              @if(selectedBookOptionsIndex === $index){
+                <div class="current-entry-options-div" (mouseleave)="hideBookOptions()">
+                  <div class="current-entry-option" (click)="setEditCurrentBookIndex($index)">Edit</div>
+                  <div class="current-entry-option" (click)="deleteCurrentBook(book.id!)">Delete</div>
+                  <div class="current-entry-option" (click)="setCurrentBookFinished(book)">Finished</div>
+                </div>
+              }
+              
+            </div>
+          }
+          
+          @if (showAddBookInput) {
+            <div class="current-entry-div add">
+              <input type="text" class="current-input add-current-input" placeholder="Add book title" [(ngModel)]="newCurrentBook.title" #addBookInput (keydown.enter)="addBook()">
+              <mat-icon class="add-current-entry-icon" (click)="addBook()">check</mat-icon>
+              <mat-icon class="add-current-entry-icon" (click)="hideAddBookInputDiv()">close</mat-icon>
+            </div>
+          }
+          
+  
+        </mat-card-content>
+      
+      </mat-card>
+  
+      <mat-card class="secondary-mobile-card current-series-card" (mouseleave)="hideAddSeriesInputDiv()">
+        <mat-card-header>
+          <mat-card-title>
+            Currently Watching 
+            <button mat-icon-button color="primary" class="add-btn add-series-btn" matTooltip="Add series" [matTooltipPosition]="'above'" (click)="showAddSeriesInputDiv()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+      
+        <mat-card-content class="current-content">
+          @if(currentSeries.length > 0) {
+            @for (series of currentSeries; track $index) {
+              <div class="current-entry-div" (mouseleave)="hideSeriesOptions()">
+                <input #seriesInput type="text" class="current-input" [(ngModel)]="series.title" [disabled]="editCurrentSeriesIndex !== $index" (blur)="editCurrentSeries(series, $index)">
+                
+                <mat-icon class="current-option-btn" (click)="showSeriesOptions($index)">more_horiz</mat-icon>
+        
+                @if(selectedSeriesOptionsIndex === $index){
+                  <div class="current-entry-options-div" (mouseleave)="hideSeriesOptions()">
+                    <div class="current-entry-option" (click)="setEditCurrentSeriesIndex($index)">Edit</div>
+                    <div class="current-entry-option" (click)="deleteCurrentSeries(series.id!)">Delete</div>
+                    <div class="current-entry-option" (click)="setCurrentSeriesFinished(series)">Finished</div>
+                  </div>
+                }
+              </div>
+            }
+          } @else {
+            -
+          }
+          
+      
+          @if (showAddSeriesInput) {
+            <div class="current-entry-div add">
+              <input type="text" class="current-input add-current-input" placeholder="Add series title" [(ngModel)]="newCurrentSeries.title" #addSeriesInput (keydown.enter)="addSeries()">
+              <mat-icon class="add-current-entry-icon" (click)="addSeries()">check</mat-icon>
+              <mat-icon class="add-current-entry-icon" (click)="hideAddSeriesInputDiv()">close</mat-icon>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+  
+    </div>
+
 
     <h1>Books</h1>
 
@@ -137,12 +225,6 @@
         @for (book of currentBooks; track $index) {
           <div class="current-entry-div" (mouseleave)="hideBookOptions()">
             <input #bookInput type="text" class="current-input" [(ngModel)]="book.title" [disabled]="editCurrentBookIndex !== $index" (blur)="editCurrentBook(book, $index)">
-            
-            <!-- <button class="current-option-btn" mat-button [matMenuTriggerFor]="menu"><mat-icon class="menu-icon">more_horiz</mat-icon></button>
-            <mat-menu #menu="matMenu">
-                  <button mat-menu-item >Edit</button>
-                  <button mat-menu-item (click)="deleteCurrentBook(book.id!)">Delete</button>
-            </mat-menu> -->
 
             <mat-icon class="current-option-btn" (click)="showBookOptions($index)">more_horiz</mat-icon>
 

@@ -52,9 +52,22 @@ mat-card-title{
     margin-top: 50px ;
 }
 
+.board-secondary-mobile{
+    @include displayFlex($fd: row, $jc: space-between);
+    width: 100%;
+    margin-bottom: 24px;
+    display: none;
+}
+
 .secondary-card{
     position: relative;
     width: 400px;    
+    @include displayFlex($jc: flex-start);
+}
+
+.secondary-mobile-card{
+    position: relative;
+    width: 48%;    
     @include displayFlex($jc: flex-start);
 }
 
@@ -209,4 +222,14 @@ mat-card-content{
 
 .link-card{
     cursor: pointer;
+}
+
+@media(max-width: 1600px){
+    .board-secondary{
+        display: none;
+    }
+
+    .board-secondary-mobile{
+        @include displayFlex($fd: row, $jc: space-between);
+    }
 }
