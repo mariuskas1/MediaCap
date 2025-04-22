@@ -1,3 +1,5 @@
+@import './../../styles.scss';
+
 .mat-drawer-container{
     height: 100vh;
   }
@@ -107,4 +109,19 @@
   &:hover {
     background-color: #f5f5f5;
   }
+}
+
+.menu-icon-mobile{
+  
+}
+
+@media(max-width: 1000px){
+    .sidenav, .menu-icon{
+      display: none;
+    }
+
+    mat-toolbar-row{
+      width: 100%;
+      @include displayFlex($fd:row, $jc: space-between)
+    }
 }

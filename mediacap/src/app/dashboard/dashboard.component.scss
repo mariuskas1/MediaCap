@@ -3,7 +3,12 @@
 .board-container{
     @include displayFlex($fd: row, $jc: flex-start, $ai: flex-start);
     width: 100%;
+}
 
+.board-main{
+    width: 100%;
+    max-width: 600px;
+    padding-bottom: 24px;
 }
 
 .main-row{
@@ -113,7 +118,6 @@ mat-card-content{
 .current-entry-div{
     @include displayFlex($fd:row, $jc: center);
     padding: 8px;
-    // width: 100%;
     width: 280px;
     border-radius: 8px;
     margin: 2px;
@@ -168,15 +172,12 @@ mat-card-content{
 }
 
 .current-entry-div.add{
-    // position: absolute;
-    // bottom: 16px;
     width: 100%;
     @include displayFlex($fd:row, $ai: center);
 }
 
 .add-current-entry-icon{
     font-size: 20px;
-    // transition: all 125ms ease;
 
     &:hover{
         cursor: pointer;
@@ -233,3 +234,4 @@ mat-card-content{
         @include displayFlex($fd: row, $jc: space-between);
     }
 }
+
