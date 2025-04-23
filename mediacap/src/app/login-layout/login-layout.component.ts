@@ -22,7 +22,7 @@ export class LoginLayoutComponent {
     this.checkForRememberedUser();
 
     setTimeout(() => {
-      if(!this.rememberedUser){
+      if(this.rememberedUser){
         this.router.navigate([`/main/${this.rememberedUserId}`]); 
       } else{
         this.showLogo = false;
@@ -47,6 +47,7 @@ export class LoginLayoutComponent {
           const rememberedUserDoc = this.users.find((user) => user.email === rememberedEmail);
   
           if (rememberedUserDoc) {
+            this.rememberedUser = true;
            this.rememberedUserId = rememberedUserDoc.id;
           } else {
             this.rememberedUser = false;

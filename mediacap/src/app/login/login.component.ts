@@ -37,6 +37,17 @@ export class LoginComponent {
     this.dialog.open(RegisterDialogComponent);
   }
 
+  ngOnInit(){
+    this.subscribeToUsersCollection();
+  }
+
+  subscribeToUsersCollection(){
+    const usersCollection = collection(this.firestore, 'users');
+    collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
+      this.users = data;
+    });
+  }
+
  
 
   logIn(ngForm: NgForm) {
