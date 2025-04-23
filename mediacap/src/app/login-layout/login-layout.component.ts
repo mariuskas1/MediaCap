@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterOutlet, RouterModule, Router } from '@angular/router';
+import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
+
 
 @Component({
   selector: 'app-login-layout',
@@ -11,11 +14,46 @@ import { RouterOutlet, RouterModule } from '@angular/router';
 })
 export class LoginLayoutComponent {
   showLogo = true;
+  users: any[] = [];
+  rememberedUser = false;
+  rememberedUserId = '';
 
   ngOnInit(){
+    this.checkForRememberedUser();
+
     setTimeout(() => {
-      this.showLogo = false;
-    }, 1000)
+      if(!this.rememberedUser){
+        this.router.navigate([`/main/${this.rememberedUserId}`]); 
+      } else{
+        this.showLogo = false;
+      }
+    }, 2000)
+  }
+
+  firestore: Firestore = inject(Firestore);
+
+  constructor(public dialog: MatDialog, private router: Router){}
+
+
+  checkForRememberedUser(): void {
+    const usersCollection = collection(this.firestore, 'users');
+    collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
+      this.users = data;
+  
+      if (typeof window !== 'undefined' && localStorage) {
+        const rememberedUser = localStorage.getItem('rememberedUser');
+        if (rememberedUser) {
+          const rememberedEmail = JSON.parse(rememberedUser).email;
+          const rememberedUserDoc = this.users.find((user) => user.email === rememberedEmail);
+  
+          if (rememberedUserDoc) {
+           this.rememberedUserId = rememberedUserDoc.id;
+          } else {
+            this.rememberedUser = false;
+          }
+        }
+      }
+    });
   }
 
 }
