@@ -99,6 +99,11 @@
     list-style-type: disc; /* Adds dots to the list items */
     padding-left: 4px;    /* Indents the list */
 }
+
+.menu-icon-mobile{
+  cursor: pointer;
+  display: none;
+}
  
 
 .menu-item {
@@ -123,6 +128,10 @@
 @media(max-width: 1000px){
     .sidenav, .menu-icon{
       display: none;
+    }
+
+    .menu-icon-mobile{
+      display: block;
     }
 
     mat-toolbar-row{
