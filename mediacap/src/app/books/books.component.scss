@@ -217,3 +217,17 @@ mat-card-content{
         scale: 1.1;
     }
 }
+
+@media(max-width: 1600px){
+    .board-secondary{
+        margin-left: 100px;
+    }
+}
+@media(max-width: 1500px){
+    .board-secondary{
+        margin-left: 50px;
+    }
+    .secondary-card{
+        width: 350px;
+    }
+}
