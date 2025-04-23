@@ -19,7 +19,7 @@ export class LoginLayoutComponent {
   rememberedUserId = '';
 
   ngOnInit(){
-    this.checkForRememberedUser();
+    this.subscribeToUsersCollection();
 
     setTimeout(() => {
       if(this.rememberedUser){
@@ -35,26 +35,27 @@ export class LoginLayoutComponent {
   constructor(public dialog: MatDialog, private router: Router){}
 
 
-  checkForRememberedUser(): void {
+  subscribeToUsersCollection(){
     const usersCollection = collection(this.firestore, 'users');
     collectionData(usersCollection, { idField: 'id' }).subscribe((data) => {
       this.users = data;
-  
-      if (typeof window !== 'undefined' && localStorage) {
-        const rememberedUser = localStorage.getItem('rememberedUser');
-        if (rememberedUser) {
-          const rememberedEmail = JSON.parse(rememberedUser).email;
-          const rememberedUserDoc = this.users.find((user) => user.email === rememberedEmail);
-  
-          if (rememberedUserDoc) {
-            this.rememberedUser = true;
-           this.rememberedUserId = rememberedUserDoc.id;
-          } else {
-            this.rememberedUser = false;
-          }
-        }
-      }
+      this.checkForRememberedUser();
     });
   }
 
+  checkForRememberedUser(): void {  
+    const rememberedUser = localStorage.getItem('rememberedUser');
+      if (rememberedUser) {
+        const rememberedEmail = JSON.parse(rememberedUser).email;
+        const rememberedUserDoc = this.users.find((user) => user.email === rememberedEmail);
+      
+        if (rememberedUserDoc) {
+          this.rememberedUser = true;
+          this.rememberedUserId = rememberedUserDoc.id;
+        } else {
+          this.rememberedUser = false;
+        }
+      }
+  }
+  
 }
